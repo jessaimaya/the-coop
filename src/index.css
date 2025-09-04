@@ -281,7 +281,7 @@ button:focus-visible {
 }
 
 .scroll-area {
-  height: 850vh;
+  height: 900vh; /* 9 * 100vh = 900vh to match JavaScript animationSectionHeight */
 }
 
 .content-section {
