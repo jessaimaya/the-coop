@@ -1,37 +1,111 @@
-:root {
-  --color-black: #232323;
+/* ==========================================================================
+   CSS RESET & NORMALIZE
+   ========================================================================== */
 
+/* Modern CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* ==========================================================================
+   CSS CUSTOM PROPERTIES
+   ========================================================================== */
+
+:root {
+  /* Colors */
+  --color-black: #232323;
+  --color-dark: #242424;
+  --color-white: rgba(255, 255, 255, 0.87);
+  --color-link: #646cff;
+  --color-link-hover: #535bf2;
+  --color-button-bg: #1a1a1a;
+  --color-button-bg-light: #f9f9f9;
+  --color-text: #333;
+  --color-text-light: #fff;
+
+  /* Typography */
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
+  /* Theme */
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--color-white);
+  background-color: var(--color-black);
 
+  /* Performance */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ==========================================================================
+   BASE ELEMENTS
+   ========================================================================== */
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-black);
+}
+
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-link);
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: var(--color-black);
+  color: var(--color-link-hover);
 }
 
 h1 {
@@ -46,13 +120,13 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-button-bg);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-link);
 }
 
 button:focus,
@@ -60,9 +134,272 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+
+.navigation {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(35, 35, 35, 0.95);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.navigation.scrolled {
+  background: rgba(35, 35, 35, 0.98);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--color-text-light);
+}
+
+.nav-logo-text {
+  font-weight: 700;
+}
+
+.nav-logo-egg {
+  font-size: 1.1rem;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--color-text-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-text-light);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link-cta {
+  background: var(--color-text-light);
+  color: var(--color-black);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.nav-link-cta::after {
+  display: none;
+}
+
+.nav-link-cta:hover {
+  background: #ffffff;
+  color: var(--color-black);
+  transform: translateY(-1px);
+}
+
+.nav-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.nav-hamburger {
+  width: 24px;
+  height: 2px;
+  background: var(--color-text-light);
+  margin: 2px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   LAYOUT COMPONENTS
+   ========================================================================== */
+
+.app-container {
+  /* Main app wrapper - no specific styles needed */
+}
+
+.animation-container {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.animation-wrapper {
+  width: min(800px, 90vw);
+  height: 100%;
+}
+
+.seo-content {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  visibility: hidden;
+}
+
+.scroll-area {
+  height: 850vh;
+}
+
+.content-section {
+  height: 100vh;
+  background: linear-gradient(to bottom, #f0f0f0, #333);
+  position: relative;
+  z-index: 20;
+}
+
+.content-text {
+  padding: 50px;
+  text-align: center;
+  color: white;
+}
+
+/* ==========================================================================
+   BOTTOM RIVE COMPONENT
+   ========================================================================== */
+
+.bottom-rive-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 30;
+  transition: opacity 0.3s ease;
+}
+
+.bottom-rive-container.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.bottom-rive-container.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.bottom-rive-animation {
+  width: 60px;
+  height: 60px;
+}
+
+.bottom-rive-text {
+  font-size: 0.75rem;
+  margin: 1rem;
+  padding-bottom: 5vh;
+  color: var(--color-text-light);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 1rem;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+
+  .nav-mobile-toggle {
+    display: flex;
+  }
+
+  .animation-wrapper {
+    width: 95vw;
+  }
+
+  .content-text {
+    padding: 30px;
+    font-size: 0.9rem;
+  }
+
+  .bottom-rive-animation {
+    width: 50px;
+    height: 50px;
+  }
+
+  .bottom-rive-text {
+    font-size: 0.7rem;
+    margin: 0.8rem;
+    padding-bottom: 4vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .animation-wrapper {
+    width: 98vw;
+  }
+
+  .content-text {
+    padding: 20px;
+    font-size: 0.8rem;
+  }
+
+  .bottom-rive-animation {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* ==========================================================================
+   LIGHT MODE OVERRIDES
+   ========================================================================== */
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
+    background-color: #ffffff;
+  }
+
+  body {
     background-color: #ffffff;
   }
 
@@ -71,6 +408,10 @@ button:focus-visible {
   }
 
   button {
-    background-color: #f9f9f9;
+    background-color: var(--color-button-bg-light);
+  }
+
+  .bottom-rive-text {
+    color: var(--color-text);
   }
 }
