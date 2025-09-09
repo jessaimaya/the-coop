@@ -3,6 +3,7 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import Image from 'next/image'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -25,9 +26,12 @@ const Carousel: React.FC<CarouselProps> = ({ slides }) => {
     <div className="carousel-container">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={30}
+        spaceBetween={0}
         slidesPerView={1}
-        navigation={true}
+        navigation={{
+          nextEl: '.swiper-button-next-custom',
+          prevEl: '.swiper-button-prev-custom',
+        }}
         pagination={{ 
           clickable: true,
           dynamicBullets: true
@@ -55,6 +59,26 @@ const Carousel: React.FC<CarouselProps> = ({ slides }) => {
           </SwiperSlide>
         ))}
       </Swiper>
+      
+      {/* Custom Navigation Arrows */}
+      <div className="swiper-button-prev-custom">
+        <Image
+          src="/images/side_arrow.svg"
+          alt="Previous"
+          width={24}
+          height={128}
+          className="arrow-prev"
+        />
+      </div>
+      <div className="swiper-button-next-custom">
+        <Image
+          src="/images/side_arrow.svg"
+          alt="Next"
+          width={24}
+          height={128}
+          className="arrow-next"
+        />
+      </div>
     </div>
   )
 }

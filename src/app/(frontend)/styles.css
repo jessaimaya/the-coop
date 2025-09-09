@@ -23,6 +23,7 @@
 html {
   font-size: 18px;
   line-height: 32px;
+  scroll-behavior: smooth;
 
   background: var(--color-background);
   -webkit-font-smoothing: antialiased;
@@ -45,6 +46,188 @@ body {
   @media (max-width: 1024px) {
     font-size: 15px;
     line-height: 24px;
+  }
+}
+
+/* ScrollSnap Container */
+.scroll-snap-container {
+  position: relative;
+}
+
+/* Section Styles */
+.content-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.section-container {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+
+  h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 3rem;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+/* Carousel Styles */
+.carousel-container {
+  width: 100%;
+  height: 100vh;
+  background: var(--blanco);
+  position: relative;
+}
+
+.coop-carousel {
+  width: 100%;
+  height: 100%;
+}
+
+.coop-carousel .carousel-slide {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--blanco);
+}
+
+.coop-carousel .slide-content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.coop-carousel .slide-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gris);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.coop-carousel .slide-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: var(--gris);
+}
+
+.coop-carousel .slide-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--naranja);
+  font-style: italic;
+}
+
+/* Custom Arrow Navigation */
+.swiper-button-prev-custom,
+.swiper-button-next-custom {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+.swiper-button-prev-custom:hover,
+.swiper-button-next-custom:hover {
+  opacity: 1;
+}
+
+.swiper-button-prev-custom {
+  left: 2rem;
+}
+
+.swiper-button-next-custom {
+  right: 2rem;
+}
+
+.arrow-prev {
+  transform: rotate(180deg);
+}
+
+.arrow-next {
+  /* No transform needed for right arrow */
+}
+
+/* Hide default Swiper navigation */
+.coop-carousel .swiper-button-next,
+.coop-carousel .swiper-button-prev {
+  display: none;
+}
+
+/* Pagination styles */
+.coop-carousel .swiper-pagination {
+  bottom: 1rem;
+}
+
+.coop-carousel .swiper-pagination-bullet {
+  background: var(--gris);
+  opacity: 0.5;
+}
+
+.coop-carousel .swiper-pagination-bullet-active {
+  background: var(--color-primary);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .carousel-container {
+    height: 100vh;
+  }
+
+  .coop-carousel .carousel-slide {
+    height: 100vh;
+  }
+
+  .coop-carousel .slide-content {
+    padding: 1.5rem;
+  }
+
+  .coop-carousel .slide-title {
+    font-size: 1.5rem;
+  }
+
+  .coop-carousel .slide-description {
+    font-size: 1rem;
+  }
+
+  .coop-carousel .slide-text {
+    font-size: 0.9rem;
+  }
+
+  .swiper-button-prev-custom,
+  .swiper-button-next-custom {
+    width: 20px;
+    height: auto;
+  }
+
+  .swiper-button-prev-custom {
+    left: 1rem;
+  }
+
+  .swiper-button-next-custom {
+    right: 1rem;
   }
 }
 
@@ -399,9 +582,7 @@ svg {
 }
 
 .section-container {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 40px;
   text-align: center;
 
   h2 {
@@ -449,14 +630,13 @@ main {
 /* Carousel Styles */
 .carousel-container {
   width: 100%;
-  max-width: 1000px;
   margin: 0 auto;
 }
 
 .coop-carousel {
   width: 100%;
   height: 400px;
-  
+
   @media (max-width: 768px) {
     height: 350px;
   }
@@ -471,16 +651,14 @@ main {
   text-align: center;
 }
 
-.slide-content {
-  max-width: 600px;
-}
+.slide-content {}
 
 .slide-title {
   font-size: 32px;
   font-weight: bold;
   color: var(--gris);
   margin-bottom: 16px;
-  
+
   @media (max-width: 768px) {
     font-size: 24px;
   }
@@ -492,7 +670,7 @@ main {
   margin-bottom: 20px;
   opacity: 0.8;
   line-height: 1.6;
-  
+
   @media (max-width: 768px) {
     font-size: 16px;
   }
@@ -509,7 +687,7 @@ main {
 .coop-carousel .swiper-button-next,
 .coop-carousel .swiper-button-prev {
   color: var(--naranja);
-  
+
   &:after {
     font-size: 20px;
     font-weight: bold;
@@ -546,7 +724,7 @@ main {
   .carousel-container {
     padding: 0 10px;
   }
-  
+
   .coop-carousel .swiper-button-next,
   .coop-carousel .swiper-button-prev {
     display: none;

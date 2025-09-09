@@ -49,23 +49,22 @@ export default async function HomePage() {
     <div className="home">
       <Hero />
       <Navbar />
-      
+
       <ScrollSnap>
         <main>
           <section id="esto-es-coop" className="content-section">
             <div className="section-container">
-              <h2>Esto es coop</h2>
               <Carousel slides={coopSlides} />
             </div>
           </section>
-          
+
           <section id="esto-hacemos" className="content-section">
             <div className="section-container">
               <h2>Esto hacemos</h2>
               <p>Content coming soon...</p>
             </div>
           </section>
-          
+
           <section id="esto-decimos" className="content-section">
             <div className="section-container">
               <h2>Esto decimos</h2>

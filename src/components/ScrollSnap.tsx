@@ -18,42 +18,22 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
     if (!container) return
 
     const handleWheel = (e: WheelEvent) => {
-      // Check if we're still in the Hero section
+      // Only handle scrolling when we're in the main sections area
       const heroHeight = document.querySelector('.hero')?.getBoundingClientRect().height || 0
+      const navbarHeight = document.querySelector('.navbar')?.getBoundingClientRect().height || 100
       const currentScrollY = window.scrollY
-      const windowHeight = window.innerHeight
       
-      // Add buffer space so last message is visible before sections appear
-      const heroBuffer = windowHeight * 2.0 // Increased to 200vh buffer for much more reading time
-      
-      // If we haven't scrolled past the Hero section + buffer, don't interfere
-      if (currentScrollY < heroHeight - windowHeight + heroBuffer) {
+      // If we haven't scrolled past the Hero section, don't interfere
+      if (currentScrollY < heroHeight) {
         return // Let the Hero handle its own scrolling
       }
 
-      // If scrolling up from first section, allow return to Hero
-      if (e.deltaY < 0 && currentSectionRef.current === 0) {
-        // Scroll to last Hero message position (before buffer)
-        const heroLastMessage = heroHeight - windowHeight
-        window.scrollTo({
-          top: heroLastMessage,
-          behavior: 'smooth'
-        })
-        currentSectionRef.current = -1 // Set to before sections
-        isScrollingRef.current = true
-        
-        // Set a flag to indicate Hero should scroll backwards
-        sessionStorage.setItem('heroDirection', 'backwards')
-        
-        setTimeout(() => {
-          isScrollingRef.current = false
-        }, 1500)
+      if (isScrollingRef.current) {
+        e.preventDefault()
         return
       }
 
-      if (isScrollingRef.current) return
-
-      // Accumulate scroll delta for less sensitivity
+      // Accumulate scroll delta for smooth detection
       const currentTime = Date.now()
       const timeDiff = currentTime - lastScrollTimeRef.current
       
@@ -65,8 +45,8 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
       lastScrollTimeRef.current = currentTime
       scrollAccumulatorRef.current += Math.abs(e.deltaY)
       
-      // Require more scroll distance to trigger section change
-      const scrollThreshold = 100 // Increased threshold for less sensitivity
+      // Require scroll threshold to trigger section change
+      const scrollThreshold = 50
       if (scrollAccumulatorRef.current < scrollThreshold) {
         e.preventDefault()
         return
@@ -77,16 +57,20 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
       // Reset accumulator after triggering
       scrollAccumulatorRef.current = 0
 
-      // Get all sections each time to ensure we have the latest
+      // Get all sections
       const sections = document.querySelectorAll('.content-section')
       if (sections.length === 0) return
 
       const direction = e.deltaY > 0 ? 1 : -1
       const nextSection = currentSectionRef.current + direction
 
-      // Check bounds for sections
+      // Check bounds
       if (nextSection < 0) {
-        // Already handled above for returning to Hero
+        // Scroll back to end of Hero
+        window.scrollTo({
+          top: heroHeight - window.innerHeight,
+          behavior: 'smooth'
+        })
         return
       }
       if (nextSection >= sections.length) return
@@ -94,29 +78,27 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
       isScrollingRef.current = true
       currentSectionRef.current = nextSection
 
-      // Scroll to the target section
-      const targetSection = sections[nextSection] as HTMLElement
-      targetSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+      // Calculate target scroll position
+      const targetScrollY = heroHeight + (nextSection * window.innerHeight)
+      
+      window.scrollTo({
+        top: targetScrollY,
+        behavior: 'smooth'
       })
 
       // Reset scrolling flag after animation
       setTimeout(() => {
         isScrollingRef.current = false
-      }, 1200) // Slightly longer timeout
+      }, 800)
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Check if we're still in the Hero section
       const heroHeight = document.querySelector('.hero')?.getBoundingClientRect().height || 0
       const currentScrollY = window.scrollY
-      const windowHeight = window.innerHeight
-      const heroBuffer = windowHeight * 2.0
       
-      // If we haven't scrolled past the Hero section + buffer, don't interfere
-      if (currentScrollY < heroHeight - windowHeight + heroBuffer) {
-        return // Let the Hero handle its own scrolling
+      // If we're in Hero area, let Hero handle it
+      if (currentScrollY < heroHeight) {
+        return
       }
 
       if (isScrollingRef.current) return
@@ -136,18 +118,11 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
         case 'PageUp':
           e.preventDefault()
           if (currentSectionRef.current === 0) {
-            // Scroll back to Hero last message
-            const heroLastMessage = heroHeight - windowHeight
+            // Scroll back to Hero end
             window.scrollTo({
-              top: heroLastMessage,
+              top: heroHeight - window.innerHeight,
               behavior: 'smooth'
             })
-            currentSectionRef.current = -1
-            sessionStorage.setItem('heroDirection', 'backwards')
-            isScrollingRef.current = true
-            setTimeout(() => {
-              isScrollingRef.current = false
-            }, 1500)
             return
           } else {
             nextSection = Math.max(currentSectionRef.current - 1, 0)
@@ -155,17 +130,7 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
           break
         case 'Home':
           e.preventDefault()
-          // Scroll to top of Hero (first message)
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          })
-          currentSectionRef.current = -1
-          sessionStorage.setItem('heroDirection', 'forward')
-          isScrollingRef.current = true
-          setTimeout(() => {
-            isScrollingRef.current = false
-          }, 1500)
+          window.scrollTo({ top: 0, behavior: 'smooth' })
           return
         case 'End':
           e.preventDefault()
@@ -177,39 +142,34 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
         isScrollingRef.current = true
         currentSectionRef.current = nextSection
         
-        const targetSection = sections[nextSection] as HTMLElement
-        targetSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+        const targetScrollY = heroHeight + (nextSection * window.innerHeight)
+        window.scrollTo({
+          top: targetScrollY,
+          behavior: 'smooth'
         })
 
         setTimeout(() => {
           isScrollingRef.current = false
-        }, 1000)
+        }, 800)
       }
     }
 
-    // Monitor scroll position to reset section tracking when back in Hero
+    // Monitor scroll position to update current section
     const handleScroll = () => {
+      if (isScrollingRef.current) return
+      
       const heroHeight = document.querySelector('.hero')?.getBoundingClientRect().height || 0
       const currentScrollY = window.scrollY
-      const windowHeight = window.innerHeight
-      const heroBuffer = windowHeight * 2.0
       
-      // If we're back in Hero area, reset section tracking
-      if (currentScrollY < heroHeight - windowHeight + heroBuffer) {
-        currentSectionRef.current = -1
-      } else if (currentScrollY >= heroHeight - windowHeight + heroBuffer) {
-        // We're in sections area, determine which section
+      if (currentScrollY >= heroHeight) {
+        // Calculate which section we're in
+        const sectionIndex = Math.round((currentScrollY - heroHeight) / window.innerHeight)
         const sections = document.querySelectorAll('.content-section')
-        if (sections.length > 0) {
-          const sectionIndex = Math.floor((currentScrollY - (heroHeight - windowHeight + heroBuffer)) / windowHeight)
-          currentSectionRef.current = Math.max(0, Math.min(sectionIndex, sections.length - 1))
-        }
+        currentSectionRef.current = Math.max(0, Math.min(sectionIndex, sections.length - 1))
       }
     }
 
-    // Add event listeners to window for better coverage
+    // Add event listeners
     window.addEventListener('wheel', handleWheel, { passive: false })
     window.addEventListener('keydown', handleKeyDown)
     window.addEventListener('scroll', handleScroll, { passive: true })
