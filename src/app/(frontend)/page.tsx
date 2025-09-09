@@ -5,6 +5,10 @@ import React from 'react'
 import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
+import Hero from '@/components/Hero'
+import Navbar from '@/components/Navbar'
+import ScrollSnap from '@/components/ScrollSnap'
+import Carousel from '@/components/Carousel'
 import './styles.css'
 
 export default async function HomePage() {
@@ -13,47 +17,63 @@ export default async function HomePage() {
   const payload = await getPayload({ config: payloadConfig })
   const { user } = await payload.auth({ headers })
 
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
+  // Sample carousel data based on your brand
+  const coopSlides = [
+    {
+      id: 1,
+      title: "Un modelo propio",
+      description: "No somos agencia ni estudio ni colectivo. Somos una estructura estratégica, creativa y con una manera muy nuestra de hacer las cosas.",
+      content: "Profesionales sin rigidez, ingeniosos sin sobreactuar, flexibles sin perder foco."
+    },
+    {
+      id: 2,
+      title: "Equipos compactos pero poderosos",
+      description: "Seleccionamos talento con precisión. Sin desperdicios, sin jerarquías de más y sin trajes forzados.",
+      content: "Conectamos los talentos correctos para lograr cosas que nadie podría hacer solo."
+    },
+    {
+      id: 3,
+      title: "Inteligencia, creatividad y cooperación",
+      description: "Soñamos con un ecosistema donde reemplacen el ruido, la burocracia y los egos.",
+      content: "Una referencia para quienes buscan una forma más inteligente y honesta de hacer las cosas."
+    },
+    {
+      id: 4,
+      title: "Estrategia, creatividad y huevos",
+      description: "Lo esencial para que las ideas crezcan. Con profesionalismo, con ingenio... y con un toque de actitud.",
+      content: "Lo nuestro es resolver, proponer, ejecutar."
+    }
+  ]
 
   return (
     <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
+      <Hero />
+      <Navbar />
+      
+      <ScrollSnap>
+        <main>
+          <section id="esto-es-coop" className="content-section">
+            <div className="section-container">
+              <h2>Esto es coop</h2>
+              <Carousel slides={coopSlides} />
+            </div>
+          </section>
+          
+          <section id="esto-hacemos" className="content-section">
+            <div className="section-container">
+              <h2>Esto hacemos</h2>
+              <p>Content coming soon...</p>
+            </div>
+          </section>
+          
+          <section id="esto-decimos" className="content-section">
+            <div className="section-container">
+              <h2>Esto decimos</h2>
+              <p>Content coming soon...</p>
+            </div>
+          </section>
+        </main>
+      </ScrollSnap>
     </div>
   )
 }

@@ -1,67 +1,175 @@
-# Payload Blank Template
+# coop
 
-This template comes configured with the bare minimum to get started on anything you need.
+> Donde las ideas encuentran forma, alas y sentido.
 
-## Quick start
+**coop** es una estructura flexible que se arma a la medida de cada proyecto. Un lugar donde los talentos correctos se conectan para lograr cosas que nadie podría hacer solo.
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+---
 
-## Quick Start - local setup
+## 🎯 **Visión**
 
-To spin up this template locally, follow these steps:
+Que ninguna idea se quede sin nacer por falta de estructura, equipo o dirección.
 
-### Clone
+Queremos ser donde las ideas encuentren forma, alas y sentido. Una referencia para quienes buscan una forma más inteligente y honesta de hacer las cosas.
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+Soñamos con un ecosistema donde la **inteligencia**, la **creatividad** y la **cooperación** reemplacen el ruido, la burocracia y los egos.
 
-### Development
+---
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URI` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+## 🚀 **Misión**
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+Lo nuestro es **resolver**, **proponer**, **ejecutar**.
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+**coop** es una estructura flexible que se arma a la medida de cada proyecto. Seleccionamos talento con precisión y trabajamos con equipos compactos pero poderosos.
 
-#### Docker (Optional)
+Sin desperdicios, sin jerarquías de más y sin trajes forzados.
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+**Estrategia, creatividad y huevos**: lo esencial para que las ideas crezcan. Con profesionalismo, con ingenio... y con un toque de actitud.
 
-To do so, follow these steps:
+---
 
-- Modify the `MONGODB_URI` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URI` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+## 🎨 **Personalidad**
 
-## How it works
+**coop** no cabe en etiquetas.
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+No somos agencia ni estudio ni colectivo. Somos un **modelo propio**: estratégico, creativo y con una manera muy nuestra de hacer las cosas.
 
-### Collections
+Tenemos una voz clara, una visión práctica y una actitud que combina inteligencia, colaboración y una dosis justa de ingenio.
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+### En pocas palabras
 
-- #### Users (Authentication)
+- **Siempre**, estratégicos; **siempre**, auténticos
+- Profesionales, sin rigidez  
+- Ingeniosos, sin sobreactuar
+- Flexibles sin perder foco
+- Directos, pero amables
+- Curiosos sin descanso
+- Creativos con intención
 
-  Users are auth-enabled collections that have access to the admin panel.
+Y cuando hace falta... **con huevos** 🥚
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/main/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+---
 
-- #### Media
+## 🛠️ **Tecnología**
 
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+Este proyecto está construido con tecnologías modernas para crear experiencias web excepcionales:
 
-### Docker
+### Stack Principal
 
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
+- **[Next.js 15](https://nextjs.org/)** - Framework de React para producción
+- **[Payload CMS](https://payloadcms.com/)** - Sistema de gestión de contenido headless
+- **[TypeScript](https://www.typescriptlang.org/)** - JavaScript con tipado estático
+- **[MongoDB](https://www.mongodb.com/)** - Base de datos NoSQL
 
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+### Características
 
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+- 🎨 **Diseño responsive** adaptable a cualquier dispositivo
+- ⚡ **Rendimiento optimizado** con Next.js y SSR
+- 📝 **CMS flexible** para gestión de contenido
+- 🔒 **Autenticación integrada** con Payload
+- ☁️ **Cloud-ready** para despliegue en Payload Cloud
+- 📱 **PWA ready** para experiencias móviles nativas
 
-## Questions
+---
 
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+## 🚀 **Desarrollo**
+
+### Requisitos previos
+
+- Node.js 18+ 
+- npm o yarn
+- MongoDB (local o remoto)
+
+### Instalación
+
+```bash
+# Clonar el repositorio
+git clone <repository-url>
+cd the-coop
+
+# Instalar dependencias
+npm install
+
+# Configurar variables de entorno
+cp .env.example .env.local
+# Editar .env.local con tus configuraciones
+
+# Ejecutar en desarrollo
+npm run dev
+```
+
+### Scripts disponibles
+
+```bash
+npm run dev          # Servidor de desarrollo
+npm run build        # Construir para producción  
+npm run start        # Servidor de producción
+npm run lint         # Linter de código
+npm run generate:types # Generar tipos de Payload
+```
+
+### Estructura del proyecto
+
+```
+src/
+├── app/
+│   ├── (frontend)/     # Aplicación frontend
+│   └── (payload)/      # Panel de administración CMS
+├── collections/        # Colecciones de Payload
+├── components/         # Componentes React reutilizables
+└── payload.config.ts   # Configuración de Payload CMS
+
+public/                 # Archivos estáticos
+```
+
+---
+
+## 🎨 **Paleta de colores**
+
+```css
+--gris: #232323      /* Fondo principal */
+--naranja: #ee6123    /* Acento principal */
+--amarillo: #ffcf00   /* Acento secundario */
+--beige: #FEF4C7      /* Acento suave */
+--blanco: #fff        /* Texto principal */
+```
+
+---
+
+## 📦 **Despliegue**
+
+### Payload Cloud (Recomendado)
+```bash
+# Conectar con Payload Cloud
+npx payload login
+npx payload deploy
+```
+
+### Otros proveedores
+- **Vercel**: Conecta tu repositorio para despliegue automático
+- **Netlify**: Soporte para SSR y funciones serverless
+- **Railway**: Despliegue sencillo con base de datos incluida
+
+---
+
+## 🤝 **Contribuir**
+
+Las mejores ideas surgen de la colaboración. Si tienes algo que aportar:
+
+1. Fork del proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/nueva-idea`)
+3. Commit tus cambios (`git commit -m 'Agregar nueva idea'`)
+4. Push a la rama (`git push origin feature/nueva-idea`)
+5. Abre un Pull Request
+
+---
+
+## 📄 **Licencia**
+
+Este proyecto representa nuestra forma de hacer las cosas. Úsalo, aprende de él, mejóralo.
+
+---
+
+**coop** - *Donde las ideas encuentran su camino*
+
+*Hecho con inteligencia, creatividad y cooperación* 🚀
