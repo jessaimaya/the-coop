@@ -3,6 +3,7 @@
 
   /* Color Palette */
   --gris: #232323;
+  --gris-palido: #393939;
   --naranja: #ee6123;
   --amarillo: #ffcf00;
   --beige: #FEF4C7;
@@ -132,17 +133,28 @@ body {
 
 /* Pagination styles */
 .coop-carousel .swiper-pagination {
-  bottom: 1rem;
+  position: absolute !important;
+  left: 5% !important;
+  bottom: 5rem !important;
+  margin-left: -1rem;
+  transform: none !important;
+  text-align: left;
+  text-indent: 3rem;
 }
 
 .coop-carousel .swiper-pagination-bullet {
-  background: var(--gris);
-  opacity: 0.5;
+  background: var(--gris-palido);
+  width: 32px;
+  height: 32px;
+  margin: 0 8px;
+  transform: none !important;
+  transition: background-color 0.3s ease !important;
 }
 
 .coop-carousel .swiper-pagination-bullet-active {
   background: var(--color-primary);
   opacity: 1;
+  transform: none !important;
 }
 
 @media (max-width: 768px) {
@@ -182,6 +194,19 @@ body {
 
   .swiper-button-next-custom {
     right: 1rem;
+  }
+
+  /* Mobile pagination adjustments */
+  .coop-carousel .swiper-pagination {
+    left: 10vw !important;
+    bottom: 2rem !important;
+  }
+
+  .coop-carousel .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    transform: none !important;
   }
 }
 
@@ -631,10 +656,11 @@ main {
 .slide-title {
   font-size: 7rem;
   font-weight: 700;
-  color: var(--gris);
+  color: var(--gris-palido);
   margin-bottom: 1.5rem;
   line-height: 0.9;
   text-decoration: line-through;
+
 
   @media (max-width: 1024px) {
     font-size: 2.5rem;
@@ -646,11 +672,16 @@ main {
 }
 
 .slide-description {
-  font-size: 2.5rem;
-  font-weight: 100;
+  font-size: 2rem;
+  font-weight: 200;
   color: var(--gris);
+  margin-top: 2rem;
   margin-bottom: 1.5rem;
   line-height: 1;
+
+  strong {
+    font-weight: bold;
+  }
 
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -679,11 +710,11 @@ main {
   background-color: var(--naranja);
   color: var(--blanco);
   border: none;
-  padding: 2rem 1.5rem;
-  font-size: 2rem;
-  font-weight: 600;
+  padding: 2rem 6rem 2rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
   font-family: inherit;
-  border-radius: 30px;
+  border-radius: 2rem;
   cursor: pointer;
   transition: all 0.3s ease;
   margin: 2rem 0;

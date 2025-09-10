@@ -39,7 +39,7 @@ const Carousel: React.FC<CarouselProps> = ({ slides }) => {
         }}
         pagination={{
           clickable: true,
-          dynamicBullets: true
+          dynamicBullets: false
         }}
         autoplay={false}
         loop={true}
