@@ -59,7 +59,59 @@ export default async function HomePage() {
       },
       backgroundImage: "/images/slide_1.jpeg"
     }
-  ]
+  ];
+
+  const coopProjectsIdeas = [
+    {
+      id: 0,
+      title: "tecnología",
+      bullets: [
+        "Web Development",
+        "Aplicaciones",
+        "AI",
+        "eCommerce",
+        "Landing Pages",
+        "eMail marketing",
+        "Webflow",
+      ]
+    },
+    {
+      id: 1,
+      title: "estrategia",
+      bullets: [
+        "Estrategia de marketing Digital",
+        "Consultoría",
+        "Capacitación",
+        "Business Development",
+        "Branding",
+        "Growth Strategy",
+      ]
+    }, {
+      id: 2,
+      title: "performance",
+      bullets: [
+        "Advertising",
+        "Conversiones",
+        "Analytics",
+        "Tag Management",
+        "Influencers",
+        "SEO + SEM",
+        "ROI",
+        "Consulting",
+      ]
+    }, {
+      id: 3,
+      title: "producción",
+      bullets: [
+        "Diseño Gráfico",
+        "Contenido",
+        "UI/UX",
+        "Producción Audiovisual",
+        "Producción Editorial",
+        "Social Media",
+      ]
+    },
+  ];
 
   return (
     <div className="home">
@@ -74,10 +126,31 @@ export default async function HomePage() {
             </div>
           </section>
 
-          <section id="esto-hacemos" className="content-section">
-            <div className="section-container">
-              <h2>Esto hacemos</h2>
-              <p>Content coming soon...</p>
+          <section id="esto-hacemos" className="content-section esto-hacemos">
+            <div className="esto-hacemos-content">
+              <div className="esto-hacemos-text">
+                <div className="esto-hacemos-description">
+                  — esto decimos que hacemos —
+                </div>
+                <h2 className="esto-hacemos-title">projects & ideas <br />hatching</h2>
+                <div className="esto-hacemos-description">
+                  nutrimos con trabajo (y algo más) proyectos de marketing que <br />
+                  requieren del apoyo y acompañamiento de expertos en...
+                </div>
+              </div>
+              <div className="esto-hacemos-boxes">
+                {coopProjectsIdeas.map((project) => (
+                  <div key={project.id} className="esto-hacemos-box">
+                    <h3 className="box-title">{project.title}</h3>
+                    <hr />
+                    <ul className="box-list">
+                      {project.bullets.map((bullet, index) => (
+                        <li key={index}>{bullet}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 

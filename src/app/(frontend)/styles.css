@@ -5,6 +5,7 @@
   --gris: #232323;
   --gris-palido: #393939;
   --naranja: #ee6123;
+  --naranja-palido: #EF7743;
   --amarillo: #ffcf00;
   --beige: #FEF4C7;
   --blanco: #fff;
@@ -733,4 +734,200 @@ main {
     font-size: 0.9rem;
     padding: 10px 24px;
   }
+}
+
+/* Esto Hacemos Section - Same layout as carousel slides */
+.esto-hacemos {
+  background: var(--gris);
+  padding: 0 !important;
+}
+
+.esto-hacemos-content {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  background-image: url('/images/slide_2.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.esto-hacemos-text {
+  position: absolute;
+  left: 5%;
+  top: 30%;
+  transform: translateY(-50%);
+  max-width: 45%;
+  color: var(--blanco);
+  text-align: left;
+  z-index: 2;
+  padding: 2rem;
+
+  @media (max-width: 768px) {
+    left: 10%;
+    max-width: 80%;
+    padding: 1.5rem;
+  }
+}
+
+.esto-hacemos-title {
+  font-size: 6rem;
+  font-weight: 700;
+  color: var(--gris);
+  margin-bottom: 1.5rem;
+  line-height: 0.9;
+  margin: 0;
+
+  @media (max-width: 1024px) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.esto-hacemos-description {
+  font-size: 2rem;
+  font-weight: 200;
+  color: var(--gris);
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+
+  strong {
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.esto-hacemos-list {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--gris);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.esto-hacemos-cta {
+  background-color: var(--naranja);
+  color: var(--blanco);
+  border: none;
+  padding: 2rem 6rem 2rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: inherit;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 2rem 0;
+
+  &:hover {
+    background-color: var(--blanco);
+    color: var(--naranja);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: 10px 24px;
+  }
+}
+
+/* Esto Hacemos Boxes */
+.esto-hacemos-boxes {
+  position: absolute;
+  bottom: 5rem;
+  left: 0;
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 0 5%;
+  z-index: 3;
+
+  @media (max-width: 768px) {
+    position: relative;
+    bottom: auto;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+}
+
+.esto-hacemos-box {
+  opacity: 0.8;
+  background-color: var(--naranja);
+  color: var(--blanco);
+  padding: 2rem;
+  border-radius: 1rem;
+  flex: 1;
+  width: calc(25% - 1.5rem);
+
+  hr {
+    width: 55%;
+    color: var(--blanco);
+    text-align: left;
+    margin: 2rem 0;
+  }
+
+  @media (max-width: 768px) {
+    min-width: auto;
+    padding: 1.5rem;
+  }
+}
+
+.box-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: var(--blanco);
+  margin: 0 0 1rem 0;
+  text-transform: lowercase;
+
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.box-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.box-list li {
+  font-weight: 200;
+  font-size: 1.5rem;
+  line-height: 0.8;
+  color: var(--blanco);
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+}
+
+.box-list li::before {
+  content: "•";
+  color: var(--blanco);
+  font-size: 1.2rem;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
