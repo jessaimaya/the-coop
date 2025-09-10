@@ -11,6 +11,7 @@ import ScrollSnap from '@/components/ScrollSnap'
 import Carousel from '@/components/Carousel'
 import './styles.css'
 
+
 export default async function HomePage() {
   const headers = await getHeaders()
   const payloadConfig = await config
@@ -20,30 +21,15 @@ export default async function HomePage() {
   // Sample carousel data based on your brand
   const coopSlides = [
     {
-      id: 1,
-      title: "Un modelo propio",
-      description: "No somos agencia ni estudio ni colectivo. Somos una estructura estratégica, creativa y con una manera muy nuestra de hacer las cosas.",
-      content: "Profesionales sin rigidez, ingeniosos sin sobreactuar, flexibles sin perder foco."
-    },
-    {
-      id: 2,
-      title: "Equipos compactos pero poderosos",
-      description: "Seleccionamos talento con precisión. Sin desperdicios, sin jerarquías de más y sin trajes forzados.",
-      content: "Conectamos los talentos correctos para lograr cosas que nadie podría hacer solo."
-    },
-    {
-      id: 3,
-      title: "Inteligencia, creatividad y cooperación",
-      description: "Soñamos con un ecosistema donde reemplacen el ruido, la burocracia y los egos.",
-      content: "Una referencia para quienes buscan una forma más inteligente y honesta de hacer las cosas."
-    },
-    {
-      id: 4,
-      title: "Estrategia, creatividad y huevos",
-      description: "Lo esencial para que las ideas crezcan. Con profesionalismo, con ingenio... y con un toque de actitud.",
-      content: "Lo nuestro es resolver, proponer, ejecutar."
-    }
-  ]
+      id: 0,
+      title: "somos una<br/> agencia de <br />marketing y <br/>publicidad",
+      description: "somos un espacio de colaboración estratégica.<br />una <strong>estructura flexible</strong> que se arma a la medida<br /> de cada proyecto con <strong>estrategia, creatividad,<br /> criterio y <img src='/images/coop.svg' alt='coop' style='display: inline; height: 1em; vertical-align: baseline; margin: 0 0.1em;' /></strong>",
+      cta: {
+        title: "QUIERO SABER +",
+        action: "/about"
+      },
+      backgroundImage: "/images/slide_1.jpeg"
+    }]
 
   return (
     <div className="home">

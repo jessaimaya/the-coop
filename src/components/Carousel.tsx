@@ -12,9 +12,14 @@ import 'swiper/css/pagination'
 
 interface CarouselSlide {
   id: number
-  title: string
-  description: string
-  content?: string
+  title?: string | React.ElementType
+  description?: string | React.ElementType
+  content?: string | React.ElementType
+  cta?: {
+    title: string
+    action: string
+  }
+  backgroundImage: string
 }
 
 interface CarouselProps {
@@ -32,34 +37,61 @@ const Carousel: React.FC<CarouselProps> = ({ slides }) => {
           nextEl: '.swiper-button-next-custom',
           prevEl: '.swiper-button-prev-custom',
         }}
-        pagination={{ 
+        pagination={{
           clickable: true,
           dynamicBullets: true
         }}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true
-        }}
+        autoplay={false}
         loop={true}
         speed={600}
         className="coop-carousel"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
-            <div className="carousel-slide">
+            <div
+              className="carousel-slide"
+              style={{
+                backgroundImage: `url(${slide.backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            >
               <div className="slide-content">
-                <h3 className="slide-title">{slide.title}</h3>
-                <p className="slide-description">{slide.description}</p>
+                {slide.title && (
+                  typeof slide.title === "string" ? (
+                    <h3 className="slide-title" dangerouslySetInnerHTML={{ __html: slide.title }} />
+                  ) : (
+                    React.createElement(slide.title as React.ElementType)
+                  )
+                )}
+                {slide.description && (
+                  typeof slide.description === "string" ? (
+                    <div className="slide-description" dangerouslySetInnerHTML={{ __html: slide.description }} />
+                  ) : (
+                    <div className="slide-description">
+                      {React.createElement(slide.description as React.ElementType)}
+                    </div>
+                  )
+                )}
                 {slide.content && (
-                  <div className="slide-text">{slide.content}</div>
+                  typeof slide.content === "string" ? (
+                    <div className="slide-text">{slide.content}</div>
+                  ) : (
+                    React.createElement(slide.content as React.ElementType)
+                  )
+                )}
+                {slide.cta && (
+                  <button className="slide-cta" onClick={() => window.location.href = slide.cta!.action}>
+                    {slide.cta.title}
+                  </button>
                 )}
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-      
+
       {/* Custom Navigation Arrows */}
       <div className="swiper-button-prev-custom">
         <Image

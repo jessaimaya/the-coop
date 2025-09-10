@@ -18,11 +18,11 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
     if (!container) return
 
     const handleWheel = (e: WheelEvent) => {
-      // Only handle scrolling when we're in the main sections area
+      // Get current heights
       const heroHeight = document.querySelector('.hero')?.getBoundingClientRect().height || 0
-      const navbarHeight = document.querySelector('.navbar')?.getBoundingClientRect().height || 100
+      const navbarHeight = 100 // Fixed navbar height
       const currentScrollY = window.scrollY
-      
+
       // If we haven't scrolled past the Hero section, don't interfere
       if (currentScrollY < heroHeight) {
         return // Let the Hero handle its own scrolling
@@ -36,24 +36,24 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
       // Accumulate scroll delta for smooth detection
       const currentTime = Date.now()
       const timeDiff = currentTime - lastScrollTimeRef.current
-      
+
       // Reset accumulator if too much time has passed
       if (timeDiff > 150) {
         scrollAccumulatorRef.current = 0
       }
-      
+
       lastScrollTimeRef.current = currentTime
       scrollAccumulatorRef.current += Math.abs(e.deltaY)
-      
+
       // Require scroll threshold to trigger section change
-      const scrollThreshold = 50
+      const scrollThreshold = 100
       if (scrollAccumulatorRef.current < scrollThreshold) {
         e.preventDefault()
         return
       }
 
       e.preventDefault()
-      
+
       // Reset accumulator after triggering
       scrollAccumulatorRef.current = 0
 
@@ -78,9 +78,10 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
       isScrollingRef.current = true
       currentSectionRef.current = nextSection
 
-      // Calculate target scroll position
-      const targetScrollY = heroHeight + (nextSection * window.innerHeight)
-      
+      // Calculate target scroll position (account for navbar height)
+      // Since navbar is sticky, we need to offset by its height
+      const targetScrollY = heroHeight + navbarHeight + (nextSection * (window.innerHeight - navbarHeight))
+
       window.scrollTo({
         top: targetScrollY,
         behavior: 'smooth'
@@ -94,8 +95,9 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
 
     const handleKeyDown = (e: KeyboardEvent) => {
       const heroHeight = document.querySelector('.hero')?.getBoundingClientRect().height || 0
+      const navbarHeight = 100 // Fixed navbar height
       const currentScrollY = window.scrollY
-      
+
       // If we're in Hero area, let Hero handle it
       if (currentScrollY < heroHeight) {
         return
@@ -107,7 +109,7 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
       if (sections.length === 0) return
 
       let nextSection = currentSectionRef.current
-      
+
       switch (e.key) {
         case 'ArrowDown':
         case 'PageDown':
@@ -141,8 +143,8 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
       if (nextSection !== currentSectionRef.current) {
         isScrollingRef.current = true
         currentSectionRef.current = nextSection
-        
-        const targetScrollY = heroHeight + (nextSection * window.innerHeight)
+
+        const targetScrollY = heroHeight + navbarHeight + (nextSection * (window.innerHeight - navbarHeight))
         window.scrollTo({
           top: targetScrollY,
           behavior: 'smooth'
@@ -157,13 +159,14 @@ const ScrollSnap: React.FC<ScrollSnapProps> = ({ children }) => {
     // Monitor scroll position to update current section
     const handleScroll = () => {
       if (isScrollingRef.current) return
-      
+
       const heroHeight = document.querySelector('.hero')?.getBoundingClientRect().height || 0
+      const navbarHeight = 100 // Fixed navbar height
       const currentScrollY = window.scrollY
-      
+
       if (currentScrollY >= heroHeight) {
-        // Calculate which section we're in
-        const sectionIndex = Math.round((currentScrollY - heroHeight) / window.innerHeight)
+        // Calculate which section we're in (account for navbar height)
+        const sectionIndex = Math.round((currentScrollY - heroHeight - navbarHeight) / (window.innerHeight - navbarHeight))
         const sections = document.querySelectorAll('.content-section')
         currentSectionRef.current = Math.max(0, Math.min(sectionIndex, sections.length - 1))
       }

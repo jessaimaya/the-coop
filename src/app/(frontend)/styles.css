@@ -24,6 +24,7 @@ html {
   font-size: 18px;
   line-height: 32px;
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
 
   background: var(--color-background);
   -webkit-font-smoothing: antialiased;
@@ -56,7 +57,7 @@ body {
 
 /* Section Styles */
 .content-section {
-  height: 100vh;
+  height: calc(100vh - 100px);
   display: flex;
   align-items: center;
   position: relative;
@@ -64,7 +65,7 @@ body {
 
 .section-container {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 100px);
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -88,53 +89,6 @@ body {
   }
 }
 
-/* Carousel Styles */
-.carousel-container {
-  width: 100%;
-  height: 100vh;
-  background: var(--blanco);
-  position: relative;
-}
-
-.coop-carousel {
-  width: 100%;
-  height: 100%;
-}
-
-.coop-carousel .carousel-slide {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--blanco);
-}
-
-.coop-carousel .slide-content {
-  padding: 2rem;
-  text-align: center;
-}
-
-.coop-carousel .slide-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--gris);
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-}
-
-.coop-carousel .slide-description {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-  color: var(--gris);
-}
-
-.coop-carousel .slide-text {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: var(--naranja);
-  font-style: italic;
-}
 
 /* Custom Arrow Navigation */
 .swiper-button-prev-custom,
@@ -289,6 +243,7 @@ svg {
 .hero {
   position: relative;
   width: 100%;
+  scroll-snap-align: start;
 }
 
 .hero-content {
@@ -569,9 +524,9 @@ svg {
 
 /* Content Sections */
 .content-section {
-  height: 100vh;
+  height: calc(100vh + 100px);
   width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh + 100px);
   padding: 80px 0;
   background: #E1E2DF;
   display: flex;
@@ -579,6 +534,12 @@ svg {
   justify-content: center;
   position: relative;
   z-index: 50;
+  scroll-snap-align: start;
+}
+
+/* Remove padding from carousel section to fill completely */
+.content-section:first-child {
+  padding: 0;
 }
 
 .section-container {
@@ -627,106 +588,118 @@ main {
   z-index: 50;
 }
 
-/* Carousel Styles */
+/* Updated Carousel Styles for Full Screen Layout */
 .carousel-container {
   width: 100%;
-  margin: 0 auto;
+  height: calc(100vh - 100px);
+  position: relative;
 }
 
 .coop-carousel {
   width: 100%;
-  height: 400px;
-
-  @media (max-width: 768px) {
-    height: 350px;
-  }
+  height: calc(100vh - 100px);
 }
 
 .carousel-slide {
+  height: calc(100vh - 100px);
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding: 40px 20px;
-  text-align: center;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.slide-content {}
-
-.slide-title {
-  font-size: 32px;
-  font-weight: bold;
-  color: var(--gris);
-  margin-bottom: 16px;
+.slide-content {
+  position: absolute;
+  left: 5%;
+  top: 40%;
+  transform: translateY(-50%);
+  max-width: 45%;
+  color: var(--blanco);
+  text-align: left;
+  z-index: 2;
+  padding: 2rem;
 
   @media (max-width: 768px) {
-    font-size: 24px;
+    left: 10%;
+    max-width: 80%;
+    padding: 1.5rem;
+  }
+}
+
+.slide-title {
+  font-size: 7rem;
+  font-weight: 700;
+  color: var(--gris);
+  margin-bottom: 1.5rem;
+  line-height: 0.9;
+  text-decoration: line-through;
+
+  @media (max-width: 1024px) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
   }
 }
 
 .slide-description {
-  font-size: 18px;
+  font-size: 2.5rem;
+  font-weight: 100;
   color: var(--gris);
-  margin-bottom: 20px;
-  opacity: 0.8;
-  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  line-height: 1;
 
   @media (max-width: 768px) {
-    font-size: 16px;
+    font-size: 1rem;
+  }
+
+  img {
+    top: 0.5rem;
+    position: relative;
   }
 }
 
 .slide-text {
-  font-size: 16px;
+  font-size: 3rem;
+  font-weight: 100;
   color: var(--gris);
-  opacity: 0.7;
-  line-height: 1.5;
-}
+  margin-bottom: 2rem;
+  line-height: 1.7;
+  font-style: italic;
 
-/* Swiper customization */
-.coop-carousel .swiper-button-next,
-.coop-carousel .swiper-button-prev {
-  color: var(--naranja);
-
-  &:after {
-    font-size: 20px;
-    font-weight: bold;
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
   }
 }
 
-.coop-carousel .swiper-button-next:hover,
-.coop-carousel .swiper-button-prev:hover {
-  color: var(--amarillo);
-}
+.slide-cta {
+  background-color: var(--naranja);
+  color: var(--blanco);
+  border: none;
+  padding: 2rem 1.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 2rem 0;
 
-.coop-carousel .swiper-pagination-bullet {
-  background: var(--gris);
-  opacity: 0.4;
-  width: 10px;
-  height: 10px;
-}
-
-.coop-carousel .swiper-pagination-bullet-active {
-  background: var(--naranja);
-  opacity: 1;
-}
-
-.coop-carousel .swiper-pagination {
-  bottom: 20px;
-}
-
-/* Smooth transitions */
-.carousel-slide {
-  transition: all 0.3s ease-in-out;
-}
-
-@media (max-width: 768px) {
-  .carousel-container {
-    padding: 0 10px;
+  &:hover {
+    background-color: var(--blanco);
+    color: var(--naranja);
+    transform: translateY(-2px);
   }
 
-  .coop-carousel .swiper-button-next,
-  .coop-carousel .swiper-button-prev {
-    display: none;
+  &:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: 10px 24px;
   }
 }
