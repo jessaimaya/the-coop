@@ -26,7 +26,6 @@ html {
   font-size: 18px;
   line-height: 32px;
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
 
   background: var(--color-background);
   -webkit-font-smoothing: antialiased;
@@ -52,10 +51,6 @@ body {
   }
 }
 
-/* ScrollSnap Container */
-.scroll-snap-container {
-  position: relative;
-}
 
 /* Section Styles */
 .content-section {
@@ -269,7 +264,6 @@ svg {
 .hero {
   position: relative;
   width: 100%;
-  scroll-snap-align: start;
 }
 
 .hero-content {
@@ -560,7 +554,6 @@ svg {
   justify-content: center;
   position: relative;
   z-index: 50;
-  scroll-snap-align: start;
 }
 
 /* Remove padding from carousel section to fill completely */
@@ -593,15 +586,7 @@ svg {
   }
 }
 
-/* Scroll Snap Container */
-.scroll-snap-container {
-  width: 100%;
-}
 
-/* Smooth scrolling for the entire document */
-html {
-  scroll-behavior: smooth;
-}
 
 /* Home container */
 .home {

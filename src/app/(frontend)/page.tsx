@@ -136,59 +136,57 @@ export default async function HomePage() {
       <Hero />
       <Navbar />
 
-      <ScrollSnap>
-        <main>
-          <section id="esto-es-coop" className="content-section">
-            <div className="section-container">
-              <Carousel slides={coopSlides} />
-            </div>
-          </section>
+      <main>
+        <section id="esto-es-coop" className="content-section">
+          <div className="section-container">
+            <Carousel slides={coopSlides} />
+          </div>
+        </section>
 
-          <section id="esto-hacemos" className="content-section esto-hacemos">
-            <div className="esto-hacemos-content">
-              <div className="esto-hacemos-text">
-                <div className="esto-hacemos-description">
-                  — esto decimos que hacemos —
-                </div>
-                <h2 className="esto-hacemos-title">projects & ideas <br />hatching</h2>
-                <div className="esto-hacemos-description">
-                  nutrimos con trabajo (y algo más) proyectos de marketing que <br />
-                  requieren del apoyo y acompañamiento de expertos en...
-                </div>
+        <section id="esto-hacemos" className="content-section esto-hacemos">
+          <div className="esto-hacemos-content">
+            <div className="esto-hacemos-text">
+              <div className="esto-hacemos-description">
+                — esto decimos que hacemos —
               </div>
-              <div className="esto-hacemos-boxes">
-                {coopProjectsIdeas.map((project) => (
-                  <div key={project.id} className="esto-hacemos-box">
-                    <h3 className="box-title">{project.title}</h3>
-                    <hr />
-                    <ul className="box-list">
-                      {project.bullets.map((bullet, index) => (
-                        <li key={index}>{bullet}</li>
-                      ))}
-                    </ul>
-                    <Image
-                      src="/images/plus_icon.svg"
-                      alt="Plus icon"
-                      width={24}
-                      height={24}
-                      className="box-plus-icon"
-                    />
-                  </div>
-                ))}
+              <h2 className="esto-hacemos-title">projects & ideas <br />hatching</h2>
+              <div className="esto-hacemos-description">
+                nutrimos con trabajo (y algo más) proyectos de marketing que <br />
+                requieren del apoyo y acompañamiento de expertos en...
               </div>
             </div>
-          </section>
-
-          <TeHaPasado headings={teHaPasadoHeadings} subheadings={teHaPasadoSubheadings} />
-
-          <section id="contacto" className="content-section">
-            <div className="section-container">
-              <h2>Contacto</h2>
-              <p>¿Listo para trabajar juntos?</p>
+            <div className="esto-hacemos-boxes">
+              {coopProjectsIdeas.map((project) => (
+                <div key={project.id} className="esto-hacemos-box">
+                  <h3 className="box-title">{project.title}</h3>
+                  <hr />
+                  <ul className="box-list">
+                    {project.bullets.map((bullet, index) => (
+                      <li key={index}>{bullet}</li>
+                    ))}
+                  </ul>
+                  <Image
+                    src="/images/plus_icon.svg"
+                    alt="Plus icon"
+                    width={24}
+                    height={24}
+                    className="box-plus-icon"
+                  />
+                </div>
+              ))}
             </div>
-          </section>
-        </main>
-      </ScrollSnap>
+          </div>
+        </section>
+
+        <TeHaPasado headings={teHaPasadoHeadings} subheadings={teHaPasadoSubheadings} />
+
+        <section id="contacto" className="content-section">
+          <div className="section-container">
+            <h2>Contacto</h2>
+            <p>¿Listo para trabajar juntos?</p>
+          </div>
+        </section>
+      </main>
     </div>
   )
 }
