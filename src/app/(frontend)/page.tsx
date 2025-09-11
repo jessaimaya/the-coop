@@ -9,6 +9,7 @@ import Hero from '@/components/Hero'
 import Navbar from '@/components/Navbar'
 import ScrollSnap from '@/components/ScrollSnap'
 import Carousel from '@/components/Carousel'
+import TeHaPasado from '@/components/TeHaPasado'
 import './styles.css'
 
 
@@ -113,6 +114,23 @@ export default async function HomePage() {
     },
   ];
 
+  const teHaPasadoHeadings = [
+    "— tienes una idea que no sabes bajar —",
+    "— las otras agencias no terminan de sumar —",
+    "— te falta tiempo para pensar —",
+    "— mucho tiempo, poco impacto —",
+    "— difitultad para traducir visión a estructura —",
+    "— miedo a soltar el control —",
+  ];
+  const teHaPasadoSubheadings = [
+    "...la tengo en la cabeza, pero cada día que intento explicarla, se enreda.",
+    "...me entienden, pero no me leen. Todo lo tengo que detallar yo",
+    "...quiero hacer las cosas bien, pero el día no me alcanza ni para pensarlas.",
+    "...ya probé varias coas... pero sigo sin ver resultados que me convenzan.",
+    "...sé lo que quiero, pero no sé cómo se ve, ni cómo se hace.",
+    "no quiero que llegue alguien a mover todo. Solo que entienda y complemente."
+  ];
+
   return (
     <div className="home">
       <Hero />
@@ -148,16 +166,25 @@ export default async function HomePage() {
                         <li key={index}>{bullet}</li>
                       ))}
                     </ul>
+                    <Image
+                      src="/images/plus_icon.svg"
+                      alt="Plus icon"
+                      width={24}
+                      height={24}
+                      className="box-plus-icon"
+                    />
                   </div>
                 ))}
               </div>
             </div>
           </section>
 
-          <section id="esto-decimos" className="content-section">
+          <TeHaPasado headings={teHaPasadoHeadings} subheadings={teHaPasadoSubheadings} />
+
+          <section id="contacto" className="content-section">
             <div className="section-container">
-              <h2>Esto decimos</h2>
-              <p>Content coming soon...</p>
+              <h2>Contacto</h2>
+              <p>¿Listo para trabajar juntos?</p>
             </div>
           </section>
         </main>

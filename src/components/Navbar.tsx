@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
               </a>
             </li>
             <li role="listitem">
-              <a href="#esto-decimos" className={`nav-link ${activeSection === 'esto-decimos' ? 'active' : ''}`}>
+              <a href="#te-ha-pasado" className={`nav-link ${activeSection === 'te-ha-pasado' ? 'active' : ''}`}>
                 esto decimos
                 <span className="nav-triangle" aria-hidden="true"></span>
               </a>
