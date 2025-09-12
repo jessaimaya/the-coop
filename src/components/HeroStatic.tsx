@@ -7,6 +7,7 @@ const HeroStatic: React.FC = () => {
   const [activeHeading, setActiveHeading] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const activeHeadingRef = useRef(0)
+  const lastChangeTimeRef = useRef(0)
 
   const headings = [
     { left: "Bienvenidos a ", leftBold: "coop", right: "" },
@@ -23,6 +24,12 @@ const HeroStatic: React.FC = () => {
       const { position } = event.detail
       setScrollPosition(position)
 
+      // Prevent too rapid changes (minimum 800ms between changes)
+      const currentTime = Date.now()
+      if (currentTime - lastChangeTimeRef.current < 800) {
+        return
+      }
+
       // Custom spacing: first heading changes at 120px, then every 250px after that
       let headingIndex = 0
       if (position >= 120) {
@@ -31,6 +38,7 @@ const HeroStatic: React.FC = () => {
       const newActiveHeading = Math.max(0, Math.min(headingIndex, headings.length - 1))
 
       if (newActiveHeading !== activeHeadingRef.current) {
+        lastChangeTimeRef.current = currentTime
         setIsTransitioning(true)
 
         // Fade out, then change text, then fade in
@@ -38,7 +46,7 @@ const HeroStatic: React.FC = () => {
           activeHeadingRef.current = newActiveHeading
           setActiveHeading(newActiveHeading)
           setIsTransitioning(false)
-        }, 300) // Half of the transition duration
+        }, 300)
       }
     }
 
@@ -50,12 +58,12 @@ const HeroStatic: React.FC = () => {
   }, [])
 
   return (
-    <div style={{ height: '210vh', position: 'relative' }}>
+    <div style={{ height: '250vh', position: 'relative' }}>
       <div className={`hero-fixed-image ${activeHeading > 0 ? 'white' : ''}`}>
         <img src="/images/coop.svg" alt="coop logo" />
       </div>
 
-      <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+      <div style={{ height: '110vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
         <div className="hero-heading active" style={{
           position: 'fixed',
           top: '50%',
