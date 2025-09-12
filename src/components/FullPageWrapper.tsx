@@ -21,23 +21,14 @@ const FullPageWrapper: React.FC<FullPageWrapperProps> = ({ children }) => {
       scrollOverflow={true}
       touchSensitivity={5}
       onLeave={(origin, destination, direction, trigger) => {
-        console.log('onLeave', { origin, destination, direction })
+        // Section transition
       }}
       afterLoad={(origin, destination, direction, trigger) => {
-        console.log('afterLoad', { origin, destination, direction })
-        console.log('ScrollOverflow enabled:', true)
+        // Section loaded
       }}
       onScrollOverflow={(section, slide, position, direction) => {
-        console.log('🚀 ScrollOverflow DETECTED:', { 
-          sectionIndex: section ? section.index : 'undefined',
-          slideIndex: slide ? slide.index : 'undefined', 
-          scrollPosition: position, 
-          scrollDirection: direction 
-        })
-        
         // If this is the Hero section (index 0), dispatch custom event
         if (section && section.index === 0) {
-          console.log('📤 Dispatching heroScrollOverflow event with position:', position)
           const event = new CustomEvent('heroScrollOverflow', {
             detail: { position, direction }
           })

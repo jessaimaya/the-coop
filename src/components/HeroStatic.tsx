@@ -5,6 +5,7 @@ import React, { useState, useEffect, useRef } from 'react'
 const HeroStatic: React.FC = () => {
   const [scrollPosition, setScrollPosition] = useState(0)
   const [activeHeading, setActiveHeading] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const activeHeadingRef = useRef(0)
 
   const headings = [
@@ -20,40 +21,50 @@ const HeroStatic: React.FC = () => {
   useEffect(() => {
     const handleScrollOverflow = (event: CustomEvent) => {
       const { position } = event.detail
-      console.log('✅ HeroStatic received position:', position)
       setScrollPosition(position)
 
-      // Calculate which heading to show based on scroll position
-      // Let's switch every ~150px of scrolling to give much more time for each heading
-      const headingIndex = Math.floor(position / 150)
+      // Custom spacing: first heading changes at 120px, then every 250px after that
+      let headingIndex = 0
+      if (position >= 120) {
+        headingIndex = 1 + Math.floor((position - 120) / 250)
+      }
       const newActiveHeading = Math.max(0, Math.min(headingIndex, headings.length - 1))
 
-      console.log(`📊 Debug: position=${position}, headingIndex=${headingIndex}, newActiveHeading=${newActiveHeading}, maxHeadings=${headings.length}`)
-
       if (newActiveHeading !== activeHeadingRef.current) {
-        console.log(`🔄 Hero text change: ${activeHeadingRef.current} -> ${newActiveHeading}`)
-        activeHeadingRef.current = newActiveHeading
-        setActiveHeading(newActiveHeading)
+        setIsTransitioning(true)
+
+        // Fade out, then change text, then fade in
+        setTimeout(() => {
+          activeHeadingRef.current = newActiveHeading
+          setActiveHeading(newActiveHeading)
+          setIsTransitioning(false)
+        }, 300) // Half of the transition duration
       }
     }
 
-    console.log('🎯 HeroStatic: Setting up event listener')
     window.addEventListener('heroScrollOverflow', handleScrollOverflow as EventListener)
 
     return () => {
-      console.log('🎯 HeroStatic: Removing event listener')
       window.removeEventListener('heroScrollOverflow', handleScrollOverflow as EventListener)
     }
   }, [])
 
   return (
-    <div style={{ height: '170vh', position: 'relative' }}>
+    <div style={{ height: '210vh', position: 'relative' }}>
       <div className={`hero-fixed-image ${activeHeading > 0 ? 'white' : ''}`}>
         <img src="/images/coop.svg" alt="coop logo" />
       </div>
 
       <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-        <div className="hero-heading active" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '100%' }}>
+        <div className="hero-heading active" style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '100%',
+          opacity: isTransitioning ? 0 : 1,
+          transition: 'opacity 0.6s ease-in-out'
+        }}>
           <span className="text-left">
             {headings[activeHeading].left}
             {headings[activeHeading].leftBold && <strong>{headings[activeHeading].leftBold}</strong>}
