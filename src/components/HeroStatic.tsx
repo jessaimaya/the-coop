@@ -24,8 +24,8 @@ const HeroStatic: React.FC = () => {
       setScrollPosition(position)
 
       // Calculate which heading to show based on scroll position
-      // Let's switch every ~80px of scrolling to give more time for each heading
-      const headingIndex = Math.floor(position / 80)
+      // Let's switch every ~150px of scrolling to give much more time for each heading
+      const headingIndex = Math.floor(position / 150)
       const newActiveHeading = Math.max(0, Math.min(headingIndex, headings.length - 1))
 
       console.log(`📊 Debug: position=${position}, headingIndex=${headingIndex}, newActiveHeading=${newActiveHeading}, maxHeadings=${headings.length}`)
@@ -47,13 +47,13 @@ const HeroStatic: React.FC = () => {
   }, [])
 
   return (
-    <div style={{ height: '400vh', position: 'relative' }}>
+    <div style={{ height: '170vh', position: 'relative' }}>
       <div className={`hero-fixed-image ${activeHeading > 0 ? 'white' : ''}`}>
         <img src="/images/coop.svg" alt="coop logo" />
       </div>
 
       <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-        <div className="hero-heading active" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '100%' }}>
+        <div className="hero-heading active" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '100%' }}>
           <span className="text-left">
             {headings[activeHeading].left}
             {headings[activeHeading].leftBold && <strong>{headings[activeHeading].leftBold}</strong>}
