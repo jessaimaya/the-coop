@@ -5,11 +5,11 @@ import React from 'react'
 import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
-import Hero from '@/components/Hero'
+import HeroStatic from '@/components/HeroStatic'
 import Navbar from '@/components/Navbar'
-import ScrollSnap from '@/components/ScrollSnap'
 import Carousel from '@/components/Carousel'
 import TeHaPasado from '@/components/TeHaPasado'
+import FullPageWrapper from '@/components/FullPageWrapper'
 import './styles.css'
 
 
@@ -133,60 +133,71 @@ export default async function HomePage() {
 
   return (
     <div className="home">
-      <Hero />
       <Navbar />
-
-      <main>
-        <section id="esto-es-coop" className="content-section">
-          <div className="section-container">
-            <Carousel slides={coopSlides} />
-          </div>
-        </section>
-
-        <section id="esto-hacemos" className="content-section esto-hacemos">
-          <div className="esto-hacemos-content">
-            <div className="esto-hacemos-text">
-              <div className="esto-hacemos-description">
-                — esto decimos que hacemos —
-              </div>
-              <h2 className="esto-hacemos-title">projects & ideas <br />hatching</h2>
-              <div className="esto-hacemos-description">
-                nutrimos con trabajo (y algo más) proyectos de marketing que <br />
-                requieren del apoyo y acompañamiento de expertos en...
-              </div>
+      
+      <FullPageWrapper>
+        <div className="section" data-anchor="hero">
+          <HeroStatic />
+        </div>
+        
+        <div className="section" data-anchor="coop">
+          <section className="content-section">
+            <div className="section-container">
+              <Carousel slides={coopSlides} />
             </div>
-            <div className="esto-hacemos-boxes">
-              {coopProjectsIdeas.map((project) => (
-                <div key={project.id} className="esto-hacemos-box">
-                  <h3 className="box-title">{project.title}</h3>
-                  <hr />
-                  <ul className="box-list">
-                    {project.bullets.map((bullet, index) => (
-                      <li key={index}>{bullet}</li>
-                    ))}
-                  </ul>
-                  <Image
-                    src="/images/plus_icon.svg"
-                    alt="Plus icon"
-                    width={24}
-                    height={24}
-                    className="box-plus-icon"
-                  />
+          </section>
+        </div>
+
+        <div className="section" data-anchor="hacemos">
+          <section className="content-section esto-hacemos">
+            <div className="esto-hacemos-content">
+              <div className="esto-hacemos-text">
+                <div className="esto-hacemos-description">
+                  — esto decimos que hacemos —
                 </div>
-              ))}
+                <h2 className="esto-hacemos-title">projects & ideas <br />hatching</h2>
+                <div className="esto-hacemos-description">
+                  nutrimos con trabajo (y algo más) proyectos de marketing que <br />
+                  requieren del apoyo y acompañamiento de expertos en...
+                </div>
+              </div>
+              <div className="esto-hacemos-boxes">
+                {coopProjectsIdeas.map((project) => (
+                  <div key={project.id} className="esto-hacemos-box">
+                    <h3 className="box-title">{project.title}</h3>
+                    <hr />
+                    <ul className="box-list">
+                      {project.bullets.map((bullet, index) => (
+                        <li key={index}>{bullet}</li>
+                      ))}
+                    </ul>
+                    <Image
+                      src="/images/plus_icon.svg"
+                      alt="Plus icon"
+                      width={24}
+                      height={24}
+                      className="box-plus-icon"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
-        <TeHaPasado headings={teHaPasadoHeadings} subheadings={teHaPasadoSubheadings} />
+        <div className="section" data-anchor="pasado">
+          <TeHaPasado headings={teHaPasadoHeadings} subheadings={teHaPasadoSubheadings} />
+        </div>
 
-        <section id="contacto" className="content-section">
-          <div className="section-container">
-            <h2>Contacto</h2>
-            <p>¿Listo para trabajar juntos?</p>
-          </div>
-        </section>
-      </main>
+        <div className="section" data-anchor="contact">
+          <section className="content-section">
+            <div className="section-container">
+              <h2>Contacto</h2>
+              <p>¿Listo para trabajar juntos?</p>
+            </div>
+          </section>
+        </div>
+      </FullPageWrapper>
     </div>
   )
 }

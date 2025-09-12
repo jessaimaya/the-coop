@@ -53,19 +53,19 @@ const Navbar: React.FC = () => {
         <div className="navbar-right">
           <ul className="navbar-nav" role="list">
             <li role="listitem">
-              <a href="#esto-es-coop" className={`nav-link ${activeSection === 'esto-es-coop' ? 'active' : ''}`}>
+              <a href="#coop" className={`nav-link ${activeSection === 'coop' ? 'active' : ''}`}>
                 esto es coop
                 <span className="nav-triangle" aria-hidden="true"></span>
               </a>
             </li>
             <li role="listitem">
-              <a href="#esto-hacemos" className={`nav-link ${activeSection === 'esto-hacemos' ? 'active' : ''}`}>
+              <a href="#hacemos" className={`nav-link ${activeSection === 'hacemos' ? 'active' : ''}`}>
                 esto hacemos
                 <span className="nav-triangle" aria-hidden="true"></span>
               </a>
             </li>
             <li role="listitem">
-              <a href="#te-ha-pasado" className={`nav-link ${activeSection === 'te-ha-pasado' ? 'active' : ''}`}>
+              <a href="#pasado" className={`nav-link ${activeSection === 'pasado' ? 'active' : ''}`}>
                 esto decimos
                 <span className="nav-triangle" aria-hidden="true"></span>
               </a>

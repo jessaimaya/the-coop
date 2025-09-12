@@ -6,67 +6,78 @@ const Hero: React.FC = () => {
   const [activeHeading, setActiveHeading] = useState(0)
   const [hasScrolled, setHasScrolled] = useState(false)
   const [scrollDirection, setScrollDirection] = useState<'forward' | 'backward'>('forward')
+  const [updateCounter, setUpdateCounter] = useState(0) // Force re-render counter
   const headingsRef = useRef<HTMLDivElement>(null)
+  const activeHeadingRef = useRef(0) // Track current value
 
   useEffect(() => {
-    // Check for direction flag from ScrollSnap
-    const checkDirection = () => {
-      const direction = sessionStorage.getItem('heroDirection')
-      if (direction === 'backwards') {
-        setScrollDirection('backward')
-        setActiveHeading(6) // Start at last heading
-        sessionStorage.removeItem('heroDirection') // Clear flag
-      } else if (direction === 'forward') {
-        setScrollDirection('forward')
-        setActiveHeading(0) // Start at first heading
-        sessionStorage.removeItem('heroDirection') // Clear flag
-      }
-    }
+    let isDisabled = false
+    let rafId: number
 
     const handleScroll = () => {
-      const scrollY = window.scrollY
-      const windowHeight = window.innerHeight
-      
-      if (scrollY > 0 && !hasScrolled) {
-        setHasScrolled(true)
-      }
+      if (isDisabled) return
 
-      // Check for direction changes from ScrollSnap
-      checkDirection()
-
-      let headingIndex: number
-
-      if (scrollDirection === 'backward') {
-        // When scrolling backwards, calculate index in reverse
-        const totalHeadings = headingsRef.current?.children.length || 7
-        const reverseIndex = Math.floor(scrollY / windowHeight)
-        headingIndex = Math.max(0, totalHeadings - 1 - reverseIndex)
-      } else {
-        // Normal forward scrolling
-        headingIndex = Math.floor(scrollY / windowHeight)
+      // Use requestAnimationFrame for smoother updates
+      if (rafId) {
+        cancelAnimationFrame(rafId)
       }
       
-      setActiveHeading(Math.max(0, headingIndex))
+      rafId = requestAnimationFrame(() => {
+        const scrollY = window.scrollY
+        const windowHeight = window.innerHeight
+        
+        if (scrollY > 0 && !hasScrolled) {
+          setHasScrolled(true)
+        }
+
+        const headingIndex = Math.floor(scrollY / windowHeight)
+        const newActiveHeading = Math.max(0, Math.min(headingIndex, 6)) // Clamp between 0-6
+        
+        // Only update if actually different
+        if (activeHeadingRef.current !== newActiveHeading) {
+          console.log(`Hero: ${activeHeadingRef.current} -> ${newActiveHeading}`)
+          activeHeadingRef.current = newActiveHeading
+          setActiveHeading(newActiveHeading)
+          setUpdateCounter(c => c + 1)
+        }
+      })
+    }
+
+    const handleDisableHero = () => {
+      console.log('Hero scroll handler disabled')
+      isDisabled = true
     }
 
     // Update hero height dynamically
     const updateHeroHeight = () => {
-      if (headingsRef.current) {
-        const headingCount = headingsRef.current.children.length
-        const heroElement = headingsRef.current.closest('.hero') as HTMLElement
-        if (heroElement) {
-          heroElement.style.height = `${headingCount * 100}vh`
-        }
+      const heroElement = document.querySelector('.hero') as HTMLElement
+      if (heroElement) {
+        const headingCount = 7 // We have 7 headings
+        const newHeight = headingCount * 100
+        heroElement.style.height = `${newHeight}vh`
+        console.log(`Hero height set to: ${newHeight}vh`)
       }
     }
 
-    updateHeroHeight()
+    // Delay the height update to ensure DOM is ready
+    setTimeout(updateHeroHeight, 100)
+    
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('disableHeroScroll', handleDisableHero)
+    handleScroll() // Initial check
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('disableHeroScroll', handleDisableHero)
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+      }
+    }
   }, [])
 
   return (
     <div className="hero">
+      
       <div className={`hero-fixed-image ${activeHeading > 0 ? 'white' : ''}`}>
         <img src="/images/coop.svg" alt="coop logo" />
       </div>
