@@ -1,6 +1,13 @@
 'use client'
 
-import React, { useEffect, useState, useRef } from 'react'
+import React from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules'
+import Image from 'next/image'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/effect-fade'
 
 interface TeHaPasadoProps {
   headings: string[]
@@ -8,56 +15,69 @@ interface TeHaPasadoProps {
 }
 
 const TeHaPasado: React.FC<TeHaPasadoProps> = ({ headings, subheadings }) => {
-  const [activeHeading, setActiveHeading] = useState(0)
-  const headingsRef = useRef<HTMLDivElement>(null)
-  const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!headingsRef.current || !sectionRef.current) return
-
-      const section = sectionRef.current
-      const sectionTop = section.offsetTop
-      const sectionHeight = section.offsetHeight
-      const scrollY = window.scrollY
-      const windowHeight = window.innerHeight
-
-      // Check if we're in this section
-      if (scrollY >= sectionTop - windowHeight / 2 && scrollY < sectionTop + sectionHeight - windowHeight / 2) {
-        // Calculate which heading should be active based on scroll position within section
-        const sectionProgress = (scrollY - sectionTop + windowHeight / 2) / sectionHeight
-        const headingIndex = Math.min(Math.floor(sectionProgress * headings.length), headings.length - 1)
-        setActiveHeading(Math.max(0, headingIndex))
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    handleScroll() // Initial check
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [headings, subheadings])
-
   return (
-    <section ref={sectionRef} id="te-ha-pasado" className="content-section te-ha-pasado">
-      <div className="te-ha-pasado-content">
-        <div className="te-ha-pasado-text">
-          <div className="te-ha-pasado-description">
-            {headings[activeHeading]}
-          </div>
-          <div ref={headingsRef} className="te-ha-pasado-headings">
-            {subheadings.map((subheading, index) => (
-              <h2 
-                key={index} 
-                className={`te-ha-pasado-heading ${index === activeHeading ? 'active' : ''}`}
-                dangerouslySetInnerHTML={{ __html: subheading }}
-              />
-            ))}
-          </div>
-        </div>
+    <div className="te-ha-pasado-section">
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay, EffectFade]}
+        effect="fade"
+        fadeEffect={{
+          crossFade: true
+        }}
+        spaceBetween={0}
+        slidesPerView={1}
+        navigation={{
+          nextEl: '.te-ha-pasado-button-next-custom',
+          prevEl: '.te-ha-pasado-button-prev-custom',
+        }}
+        pagination={{
+          clickable: true,
+          dynamicBullets: false
+        }}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: true,
+        }}
+        loop={true}
+        className="te-ha-pasado-swiper"
+      >
+        {headings.map((heading, index) => (
+          <SwiperSlide key={index}>
+            <div className="te-ha-pasado-content">
+              <div className="te-ha-pasado-text">
+                <div className="te-ha-pasado-description">
+                  {heading}
+                </div>
+                <div className="te-ha-pasado-headings">
+                  <h2 className="te-ha-pasado-heading" dangerouslySetInnerHTML={{
+                    __html: subheadings[index]
+                  }} />
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Custom Navigation Arrows */}
+      <div className="te-ha-pasado-button-prev-custom">
+        <Image
+          src="/images/side_arrow.svg"
+          alt="Previous"
+          width={24}
+          height={128}
+          className="arrow-prev"
+        />
       </div>
-    </section>
+      <div className="te-ha-pasado-button-next-custom">
+        <Image
+          src="/images/side_arrow.svg"
+          alt="Next"
+          width={24}
+          height={128}
+          className="arrow-next"
+        />
+      </div>
+    </div>
   )
 }
 

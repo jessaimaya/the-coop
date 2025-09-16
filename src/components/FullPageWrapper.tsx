@@ -34,6 +34,14 @@ const FullPageWrapper: React.FC<FullPageWrapperProps> = ({ children }) => {
           })
           window.dispatchEvent(event)
         }
+        
+        // If this is the TeHaPasado section (index 3), dispatch custom event
+        if (section && section.index === 3) {
+          const event = new CustomEvent('teHaPasadoScrollOverflow', {
+            detail: { position, direction }
+          })
+          window.dispatchEvent(event)
+        }
       }}
       render={({ state, fullpageApi }) => {        
         return (
