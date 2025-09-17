@@ -10,6 +10,7 @@ import Navbar from '@/components/Navbar'
 import Carousel from '@/components/Carousel'
 import TeHaPasado from '@/components/TeHaPasado'
 import FullPageWrapper from '@/components/FullPageWrapper'
+import AvatarMarquee from '@/components/AvatarMarquee'
 import './styles.css'
 
 
@@ -134,12 +135,12 @@ export default async function HomePage() {
   return (
     <div className="home">
       <Navbar />
-      
+
       <FullPageWrapper>
         <div className="section" data-anchor="hero">
           <HeroStatic />
         </div>
-        
+
         <div className="section" data-anchor="coop">
           <section className="content-section">
             <div className="section-container">
@@ -187,6 +188,24 @@ export default async function HomePage() {
 
         <div className="section" data-anchor="pasado">
           <TeHaPasado headings={teHaPasadoHeadings} subheadings={teHaPasadoSubheadings} />
+        </div>
+
+
+        <div className="section" data-anchor="nosotros">
+          <section className="content-section nosotros-section">
+            <div className="section-container">
+              <AvatarMarquee />
+              <div className='nosotros-contenido'>
+                <div className="nosotros-left">
+                  <h2>trabaja <br /> con <br /> <span>coop</span></h2>
+                </div>
+                <div className="nosotros-right">
+                  <p>somos una comunidad hecha por personas multidisciplinarias llenas de talento listas para ayudar</p>
+                  <a href="#" title="contacto" className="nosotros-cta">Quiero platicar con ustedes</a>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
 
         <div className="section" data-anchor="contact">
