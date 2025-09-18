@@ -13,6 +13,8 @@ import FullPageWrapper from '@/components/FullPageWrapper'
 import AvatarMarquee from '@/components/AvatarMarquee'
 import ClientesCarousel from '@/components/ClientesCarousel'
 import Accordion from '@/components/Accordion'
+import ContactTabs from '@/components/ContactTabs'
+import Footer from '@/components/Footer'
 import './styles.css'
 
 
@@ -275,11 +277,12 @@ export default async function HomePage() {
         </div>
 
         <div className="section" data-anchor="contact">
-          <section className="content-section">
+          <section className="content-section contact-section">
             <div className="section-container">
-              <h2>Contacto</h2>
-              <div className='accordion'></div>
+              <h2>tu siguiente paso</h2>
+              <ContactTabs />
             </div>
+            <Footer />
           </section>
         </div>
       </FullPageWrapper>
