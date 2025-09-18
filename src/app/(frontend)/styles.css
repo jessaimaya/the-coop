@@ -743,7 +743,7 @@ main {
   align-items: center;
   background-image: url('/images/slide_2.jpeg');
   background-size: cover;
-  background-position: center;
+  background-position: right center;
   background-repeat: no-repeat;
   overflow: hidden;
   padding-top: 100px;
@@ -1503,6 +1503,212 @@ main {
 .clientes-swiper .swiper-button-next,
 .clientes-swiper .swiper-button-prev {
   display: none;
+}
+
+/* Dudas Section */
+.dudas-section {
+  background-image: url('/images/slide_4.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.dudas-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.dudas-left {
+  flex: 1;
+  /* Left column - shows background image */
+}
+
+.dudas-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.dudas-box {
+  background: var(--blanco);
+  border-radius: 2rem;
+  padding: 3rem;
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+
+  h2 {
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--gris);
+    margin: 0 0 2rem 0;
+    line-height: 0.7;
+    text-align: right;
+    display: flex;
+    align-self: flex-end;
+
+    @media (max-width: 1024px) {
+      font-size: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
+  p {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--gris);
+    line-height: 1.4;
+    margin-bottom: 3rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.dudas-cta {
+  background-color: var(--naranja);
+  color: var(--blanco);
+  border: none;
+  padding: 1.5rem 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: inherit;
+  text-transform: uppercase;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+
+  &:hover {
+    background-color: var(--naranja-palido);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(238, 97, 35, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+/* Accordion Component */
+.accordion {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 0.5rem;
+}
+
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.accordion-header:hover {
+  opacity: 0.8;
+}
+
+.accordion-question {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--gris);
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
+  padding-right: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+}
+
+.accordion-icon {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--naranja);
+  transition: all 0.3s ease;
+  min-width: 30px;
+  text-align: center;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.accordion-content.open {
+  max-height: 500px;
+  transition: max-height 0.3s ease-in;
+}
+
+.accordion-answer {
+  padding: 0 0 1.5rem 0;
+}
+
+.accordion-answer p {
+  font-size: 1.1rem;
+  font-weight: 200;
+  color: var(--gris);
+  line-height: 1.5;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+/* Responsive adjustments for dudas section */
+@media (max-width: 768px) {
+  .dudas-container {
+    flex-direction: column;
+  }
+
+  .dudas-left {
+    flex: 0.3;
+  }
+
+  .dudas-right {
+    flex: 0.7;
+    padding: 1rem;
+  }
+
+  .dudas-box {
+    height: 70vh;
+    padding: 2rem;
+    border-radius: 1.5rem;
+  }
 }
 
 /* Custom Fade Animations for FullPage Sections */

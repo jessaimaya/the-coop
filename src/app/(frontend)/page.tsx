@@ -12,6 +12,7 @@ import TeHaPasado from '@/components/TeHaPasado'
 import FullPageWrapper from '@/components/FullPageWrapper'
 import AvatarMarquee from '@/components/AvatarMarquee'
 import ClientesCarousel from '@/components/ClientesCarousel'
+import Accordion from '@/components/Accordion'
 import './styles.css'
 
 
@@ -133,6 +134,36 @@ export default async function HomePage() {
     "no quiero que llegue alguien a mover todo. Solo que entienda y complemente."
   ];
 
+  const dudas = [
+    {
+      pregunta: " ¿qué fue primero el huevo o la gallina?",
+      respuesta: "Obviamente el huevo. Pero, ¿entonces quien puso el huevo La gallina. Pero entonces, ¿cómo llegó la gallina Seguro de un huevo, pero ¿quién lo puso Una gallina, ¿no ¡Pero la gallina viene del huevo! Bueno, en coop primero es y será el huevo."
+    },
+    {
+      pregunta: " ¿cuál es la diferencia entre huevos rancheros y divorciados?",
+      respuesta: "Obviamente el huevo. Pero, ¿entonces quien puso el huevo La gallina. Pero entonces, ¿cómo llegó la gallina Seguro de un huevo, pero ¿quién lo puso Una gallina, ¿no ¡Pero la gallina viene del huevo! Bueno, en coop primero es y será el huevo."
+    }, {
+      pregunta: " ¿son los huevos blancos o marrones más nutritivos?",
+      respuesta: "Obviamente el huevo. Pero, ¿entonces quien puso el huevo La gallina. Pero entonces, ¿cómo llegó la gallina Seguro de un huevo, pero ¿quién lo puso Una gallina, ¿no ¡Pero la gallina viene del huevo! Bueno, en coop primero es y será el huevo."
+    }, {
+      pregunta: " ¿hay vida en otros planetas?",
+      respuesta: "Obviamente el huevo. Pero, ¿entonces quien puso el huevo La gallina. Pero entonces, ¿cómo llegó la gallina Seguro de un huevo, pero ¿quién lo puso Una gallina, ¿no ¡Pero la gallina viene del huevo! Bueno, en coop primero es y será el huevo."
+    }, {
+      pregunta: " ¿cómo saber si un huevo está fresco?",
+      respuesta: "Obviamente el huevo. Pero, ¿entonces quien puso el huevo La gallina. Pero entonces, ¿cómo llegó la gallina Seguro de un huevo, pero ¿quién lo puso Una gallina, ¿no ¡Pero la gallina viene del huevo! Bueno, en coop primero es y será el huevo."
+    }, {
+      pregunta: " ¿por qué los pilotos kamikaze llevaban casco protector?",
+      respuesta: "Obviamente el huevo. Pero, ¿entonces quien puso el huevo La gallina. Pero entonces, ¿cómo llegó la gallina Seguro de un huevo, pero ¿quién lo puso Una gallina, ¿no ¡Pero la gallina viene del huevo! Bueno, en coop primero es y será el huevo."
+    }, {
+      pregunta: " ¿cuánto tiempo se deben hervir los huevos?",
+      respuesta: "Obviamente el huevo. Pero, ¿entonces quien puso el huevo La gallina. Pero entonces, ¿cómo llegó la gallina Seguro de un huevo, pero ¿quién lo puso Una gallina, ¿no ¡Pero la gallina viene del huevo! Bueno, en coop primero es y será el huevo."
+    }, {
+      pregunta: " ¿por qué nos despertamos justo antes de que suene el despertador?",
+      respuesta: "Obviamente el huevo. Pero, ¿entonces quien puso el huevo La gallina. Pero entonces, ¿cómo llegó la gallina Seguro de un huevo, pero ¿quién lo puso Una gallina, ¿no ¡Pero la gallina viene del huevo! Bueno, en coop primero es y será el huevo."
+    },
+  ];
+
+
   return (
     <div className="home">
       <Navbar />
@@ -227,12 +258,27 @@ export default async function HomePage() {
           </section>
         </div>
 
+        <div className="section" data-anchor="dudas">
+          <section className="content-section dudas-section">
+            <div className="dudas-container">
+              <div className="dudas-left">
+                {/* Left column - empty for now, background image will show */}
+              </div>
+              <div className="dudas-right">
+                <div className="dudas-box">
+                  <h2>¿todavía <br />tienes dudas?</h2>
+                  <Accordion items={dudas} />
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
 
         <div className="section" data-anchor="contact">
           <section className="content-section">
             <div className="section-container">
               <h2>Contacto</h2>
-              <p>¿Listo para trabajar juntos?</p>
+              <div className='accordion'></div>
             </div>
           </section>
         </div>
