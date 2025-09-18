@@ -8,8 +8,8 @@ interface FullPageWrapperProps {
 }
 
 const FullPageWrapper: React.FC<FullPageWrapperProps> = ({ children }) => {
-  const anchors = ['hero', 'coop', 'hacemos', 'pasado', 'contact']
-  const sectionsColor = ['#232323', '#E1E2DF', '#232323', '#232323', '#E1E2DF']
+  const anchors = ['hero', 'coop', 'hacemos', 'pasado', 'nosotros', 'clientes', 'contact']
+  const sectionsColor = ['#232323', '#E1E2DF', '#232323', '#232323', '#232323', '#232323', '#E1E2DF']
 
   return (
     <ReactFullpage

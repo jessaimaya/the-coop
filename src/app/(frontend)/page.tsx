@@ -11,6 +11,7 @@ import Carousel from '@/components/Carousel'
 import TeHaPasado from '@/components/TeHaPasado'
 import FullPageWrapper from '@/components/FullPageWrapper'
 import AvatarMarquee from '@/components/AvatarMarquee'
+import ClientesCarousel from '@/components/ClientesCarousel'
 import './styles.css'
 
 
@@ -207,6 +208,25 @@ export default async function HomePage() {
             </div>
           </section>
         </div>
+
+        <div className="section" data-anchor="clientes">
+          <section className="content-section clientes-section">
+            <div className="section-container">
+              <div className='cliente-contenido'>
+                <div className="cliente-left">
+                  <h2><span className='light init'>ya han</span> trabaja<span className='light do'>do</span><br />con <br /> <span>coop</span></h2>
+                </div>
+                <div className="cliente-right">
+                  <div className='cliente-carousel'>
+                    <ClientesCarousel />
+                  </div>
+                  <a href="#" title="contacto" className="cliente-cta"><span className='light'>AHORA </span>Quiero platicar + con ustedes</a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
 
         <div className="section" data-anchor="contact">
           <section className="content-section">

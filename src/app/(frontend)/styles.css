@@ -1284,3 +1284,236 @@ main {
     font-size: 1rem;
   }
 }
+
+/* Clientes Section - Same style as Nosotros */
+.clientes-section {
+  background: var(--blanco);
+  padding: 0 !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cliente-contenido {
+  flex: 4;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 4rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 0 20px;
+    gap: 2rem;
+  }
+}
+
+.cliente-left {
+  flex: 1;
+
+  h2 {
+    font-size: 12rem;
+    font-weight: 900;
+    color: var(--gris);
+    margin: 0;
+    line-height: 0.7;
+    text-align: right;
+    position: relative;
+
+    span {
+      color: var(--naranja);
+    }
+
+    span.light {
+      font-weight: 100;
+      color: var(--gris);
+    }
+
+    .do {
+      position: absolute;
+    }
+
+    .init {
+      top: -10rem;
+      right: 0;
+      position: absolute;
+    }
+
+    @media (max-width: 1024px) {
+      font-size: 6rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 4rem;
+      text-align: center;
+    }
+  }
+}
+
+.cliente-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 2rem;
+}
+
+.cliente-cta {
+  background-color: var(--naranja);
+  color: var(--blanco);
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: inherit;
+  text-transform: uppercase;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+
+  span.light {
+    font-weight: 200;
+  }
+
+  &:hover {
+    background-color: var(--blanco);
+    color: var(--naranja);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    align-self: center;
+    padding: 1.2rem 2.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Clientes Carousel Styles */
+.cliente-carousel {
+  position: relative;
+  height: 450px;
+  width: 70%;
+  align-self: flex-end;
+}
+
+.clientes-swiper {
+  height: 100%;
+  width: 100%;
+  overflow: visible;
+}
+
+.clientes-columns {
+  display: flex;
+  gap: 1.2rem;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0;
+}
+
+.clientes-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.cliente-item {
+  background: transparent;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95px;
+  width: 100%;
+  max-width: 180px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.cliente-placeholder {
+  border: 2px dashed var(--naranja);
+  border-radius: 8px;
+  background: transparent;
+}
+
+.placeholder-content {
+  text-align: center;
+}
+
+.placeholder-text {
+  color: var(--naranja);
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.cliente-logo {
+  max-width: 100%;
+  max-height: 55px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(1) opacity(0.7);
+  transition: filter 0.3s ease;
+}
+
+.cliente-item:hover .cliente-logo {
+  filter: grayscale(0) opacity(1);
+}
+
+/* Custom Up Arrow Navigation */
+.clientes-button-up-custom {
+  position: absolute;
+  top: -8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+.clientes-button-up-custom:hover {
+  opacity: 1;
+}
+
+.arrow-up {
+  transform: rotate(-90deg);
+}
+
+/* Hide default Swiper navigation */
+.clientes-swiper .swiper-button-next,
+.clientes-swiper .swiper-button-prev {
+  display: none;
+}
+
+/* Custom Fade Animations for FullPage Sections */
+.section[data-animation="fade"] {
+  transition: opacity 800ms ease-in-out !important;
+}
+
+.fade-out {
+  opacity: 0 !important;
+}
+
+.fade-in {
+  opacity: 1 !important;
+}
