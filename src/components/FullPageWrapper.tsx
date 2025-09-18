@@ -15,6 +15,7 @@ const FullPageWrapper: React.FC<FullPageWrapperProps> = ({ children }) => {
     <ReactFullpage
       //fullpage options
       licenseKey={'gplv3-license'}
+      credits={{ enabled: false }}
       scrollingSpeed={1000}
       anchors={anchors}
       sectionsColor={sectionsColor}
