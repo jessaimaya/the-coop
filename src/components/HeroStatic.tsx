@@ -65,13 +65,7 @@ const HeroStatic: React.FC = () => {
 
       <div style={{ height: '110vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
         <div className="hero-heading active" style={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '100%',
           opacity: isTransitioning ? 0 : 1,
-          transition: 'opacity 0.6s ease-in-out'
         }}>
           <span className="text-left">
             {headings[activeHeading].left}

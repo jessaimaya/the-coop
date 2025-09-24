@@ -14,7 +14,7 @@ const FullPageWrapper: React.FC<FullPageWrapperProps> = ({ children }) => {
   return (
     <ReactFullpage
       //fullpage options
-      licenseKey={'gplv3-license'}
+      licenseKey={'YOUR_KEY_HERE'} // Using GPL license for open source projects
       credits={{ enabled: false }}
       scrollingSpeed={1000}
       anchors={anchors}
@@ -28,20 +28,33 @@ const FullPageWrapper: React.FC<FullPageWrapperProps> = ({ children }) => {
         // Section loaded
       }}
       onScrollOverflow={(section, slide, position, direction) => {
+        // Add defensive null checks
+        if (!section || typeof section.index !== 'number') {
+          return
+        }
+        
         // If this is the Hero section (index 0), dispatch custom event
-        if (section && section.index === 0) {
-          const event = new CustomEvent('heroScrollOverflow', {
-            detail: { position, direction }
-          })
-          window.dispatchEvent(event)
+        if (section.index === 0) {
+          try {
+            const event = new CustomEvent('heroScrollOverflow', {
+              detail: { position, direction }
+            })
+            window.dispatchEvent(event)
+          } catch (error) {
+            console.warn('Error dispatching heroScrollOverflow event:', error)
+          }
         }
         
         // If this is the TeHaPasado section (index 3), dispatch custom event
-        if (section && section.index === 3) {
-          const event = new CustomEvent('teHaPasadoScrollOverflow', {
-            detail: { position, direction }
-          })
-          window.dispatchEvent(event)
+        if (section.index === 3) {
+          try {
+            const event = new CustomEvent('teHaPasadoScrollOverflow', {
+              detail: { position, direction }
+            })
+            window.dispatchEvent(event)
+          } catch (error) {
+            console.warn('Error dispatching teHaPasadoScrollOverflow event:', error)
+          }
         }
       }}
       render={({ state, fullpageApi }) => {        

@@ -15,6 +15,7 @@ import ClientesCarousel from '@/components/ClientesCarousel'
 import Accordion from '@/components/Accordion'
 import ContactTabs from '@/components/ContactTabs'
 import Footer from '@/components/Footer'
+import ErrorBoundary from '@/components/ErrorBoundary'
 import './styles.css'
 
 
@@ -170,7 +171,8 @@ export default async function HomePage() {
     <div className="home">
       <Navbar />
 
-      <FullPageWrapper>
+      <ErrorBoundary>
+        <FullPageWrapper>
         <div className="section" data-anchor="hero">
           <HeroStatic />
         </div>
@@ -285,7 +287,8 @@ export default async function HomePage() {
             <Footer />
           </section>
         </div>
-      </FullPageWrapper>
+        </FullPageWrapper>
+      </ErrorBoundary>
     </div>
   )
 }

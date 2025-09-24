@@ -296,15 +296,19 @@ svg {
 }
 
 .hero-heading {
-  position: absolute;
+  top: 50%;
+  left: 50%;
+  position: fixed;
   margin: 0;
   font-size: 48px;
   line-height: 56px;
   font-weight: 100;
   width: 100%;
   opacity: 0;
+  height: inherit;
   transition: opacity 0.6s ease-in-out;
   color: var(--color-text);
+  transform: translate(-50%, -50%);
 
   strong {
     font-weight: bold;
@@ -318,6 +322,15 @@ svg {
     width: calc(50% - 80px);
     top: 50%;
     transform: translateY(-50%);
+
+    @media (max-width: 1023px) {
+      right: 0;
+      top: 0;
+      transform: inherit;
+      width: 100%;
+      text-align: center;
+    }
+
   }
 
   .text-right {
@@ -327,14 +340,27 @@ svg {
     width: calc(50% - 80px);
     top: 50%;
     transform: translateY(-50%);
+
+    @media (max-width: 1023px) {
+      right: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      transform: inherit;
+    }
+
   }
 
-  @media (max-width: 1024px) {
-    font-size: 36px;
+  @media (max-width: 1023px) {
+    top: 20%;
+    font-size: 30px;
     line-height: 42px;
+    left: 0;
+    transform: inherit;
+    height: 100%;
   }
 
-  @media (max-width: 768px) {
+  /*@media (max-width: 768px) {
     font-size: 28px;
     line-height: 34px;
     padding: 0 20px;
@@ -343,7 +369,7 @@ svg {
   @media (max-width: 400px) {
     font-size: 24px;
     line-height: 30px;
-  }
+  }*/
 }
 
 .hero-heading.active {
