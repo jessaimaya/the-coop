@@ -16,6 +16,7 @@ import Accordion from '@/components/Accordion'
 import ContactTabs from '@/components/ContactTabs'
 import Footer from '@/components/Footer'
 import ErrorBoundary from '@/components/ErrorBoundary'
+import ScrollManager from '@/components/ScrollManager'
 import './styles.css'
 
 
@@ -172,122 +173,122 @@ export default async function HomePage() {
       <Navbar />
 
       <ErrorBoundary>
-        <FullPageWrapper>
-        <div className="section" data-anchor="hero">
-          <HeroStatic />
-        </div>
-
-        <div className="section" data-anchor="coop">
-          <section className="content-section">
-            <div className="section-container">
-              <Carousel slides={coopSlides} />
-            </div>
-          </section>
-        </div>
-
-        <div className="section" data-anchor="hacemos">
-          <section className="content-section esto-hacemos">
-            <div className="esto-hacemos-content">
-              <div className="esto-hacemos-text">
-                <div className="esto-hacemos-description">
-                  — esto decimos que hacemos —
-                </div>
-                <h2 className="esto-hacemos-title">projects & ideas <br />hatching</h2>
-                <div className="esto-hacemos-description">
-                  nutrimos con trabajo (y algo más) proyectos de marketing que <br />
-                  requieren del apoyo y acompañamiento de expertos en...
-                </div>
+        <ScrollManager
+          heroComponent={<HeroStatic />}
+          fullPageComponent={
+            <FullPageWrapper>
+              <div className="section" data-anchor="coop">
+                <section className="content-section">
+                  <div className="section-container">
+                    <Carousel slides={coopSlides} />
+                  </div>
+                </section>
               </div>
-              <div className="esto-hacemos-boxes">
-                {coopProjectsIdeas.map((project) => (
-                  <div key={project.id} className="esto-hacemos-box">
-                    <h3 className="box-title">{project.title}</h3>
-                    <hr />
-                    <ul className="box-list">
-                      {project.bullets.map((bullet, index) => (
-                        <li key={index}>{bullet}</li>
+
+              <div className="section" data-anchor="hacemos">
+                <section className="content-section esto-hacemos">
+                  <div className="esto-hacemos-content">
+                    <div className="esto-hacemos-text">
+                      <div className="esto-hacemos-description">
+                        — esto decimos que hacemos —
+                      </div>
+                      <h2 className="esto-hacemos-title">projects & ideas <br />hatching</h2>
+                      <div className="esto-hacemos-description">
+                        nutrimos con trabajo (y algo más) proyectos de marketing que <br />
+                        requieren del apoyo y acompañamiento de expertos en...
+                      </div>
+                    </div>
+                    <div className="esto-hacemos-boxes">
+                      {coopProjectsIdeas.map((project) => (
+                        <div key={project.id} className="esto-hacemos-box">
+                          <h3 className="box-title">{project.title}</h3>
+                          <hr />
+                          <ul className="box-list">
+                            {project.bullets.map((bullet, index) => (
+                              <li key={index}>{bullet}</li>
+                            ))}
+                          </ul>
+                          <Image
+                            src="/images/plus_icon.svg"
+                            alt="Plus icon"
+                            width={24}
+                            height={24}
+                            className="box-plus-icon"
+                          />
+                        </div>
                       ))}
-                    </ul>
-                    <Image
-                      src="/images/plus_icon.svg"
-                      alt="Plus icon"
-                      width={24}
-                      height={24}
-                      className="box-plus-icon"
-                    />
+                    </div>
                   </div>
-                ))}
+                </section>
               </div>
-            </div>
-          </section>
-        </div>
 
-        <div className="section" data-anchor="pasado">
-          <TeHaPasado headings={teHaPasadoHeadings} subheadings={teHaPasadoSubheadings} />
-        </div>
-
-
-        <div className="section" data-anchor="nosotros">
-          <section className="content-section nosotros-section">
-            <div className="section-container">
-              <AvatarMarquee />
-              <div className='nosotros-contenido'>
-                <div className="nosotros-left">
-                  <h2>trabaja <br /> con <br /> <span>coop</span></h2>
-                </div>
-                <div className="nosotros-right">
-                  <p>somos una comunidad hecha por personas multidisciplinarias llenas de talento listas para ayudar</p>
-                  <a href="#" title="contacto" className="nosotros-cta">Quiero platicar con ustedes</a>
-                </div>
+              <div className="section" data-anchor="pasado">
+                <TeHaPasado headings={teHaPasadoHeadings} subheadings={teHaPasadoSubheadings} />
               </div>
-            </div>
-          </section>
-        </div>
 
-        <div className="section" data-anchor="clientes">
-          <section className="content-section clientes-section">
-            <div className="section-container">
-              <div className='cliente-contenido'>
-                <div className="cliente-left">
-                  <h2><span className='light init'>ya han</span> trabaja<span className='light do'>do</span><br />con <br /> <span>coop</span></h2>
-                </div>
-                <div className="cliente-right">
-                  <div className='cliente-carousel'>
-                    <ClientesCarousel />
+              <div className="section" data-anchor="nosotros">
+                <section className="content-section nosotros-section">
+                  <div className="section-container">
+                    <AvatarMarquee />
+                    <div className='nosotros-contenido'>
+                      <div className="nosotros-left">
+                        <h2>trabaja <br /> con <br /> <span>coop</span></h2>
+                      </div>
+                      <div className="nosotros-right">
+                        <p>somos una comunidad hecha por personas multidisciplinarias llenas de talento listas para ayudar</p>
+                        <a href="#" title="contacto" className="nosotros-cta">Quiero platicar con ustedes</a>
+                      </div>
+                    </div>
                   </div>
-                  <a href="#" title="contacto" className="cliente-cta"><span className='light'>AHORA </span>Quiero platicar + con ustedes</a>
-                </div>
+                </section>
               </div>
-            </div>
-          </section>
-        </div>
 
-        <div className="section" data-anchor="dudas">
-          <section className="content-section dudas-section">
-            <div className="dudas-container">
-              <div className="dudas-left">
-                {/* Left column - empty for now, background image will show */}
+              <div className="section" data-anchor="clientes">
+                <section className="content-section clientes-section">
+                  <div className="section-container">
+                    <div className='cliente-contenido'>
+                      <div className="cliente-left">
+                        <h2><span className='light init'>ya han</span> trabaja<span className='light do'>do</span><br />con <br /> <span>coop</span></h2>
+                      </div>
+                      <div className="cliente-right">
+                        <div className='cliente-carousel'>
+                          <ClientesCarousel />
+                        </div>
+                        <a href="#" title="contacto" className="cliente-cta"><span className='light'>AHORA </span>Quiero platicar + con ustedes</a>
+                      </div>
+                    </div>
+                  </div>
+                </section>
               </div>
-              <div className="dudas-right">
-                <div className="dudas-box">
-                  <h2>¿todavía <br />tienes dudas?</h2>
-                  <Accordion items={dudas} />
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
 
-        <div className="section" data-anchor="contact">
-          <section className="content-section contact-section">
-            <div className="section-container">
-              <h2>tu siguiente paso</h2>
-              <ContactTabs />
-            </div>
-            <Footer />
-          </section>
-        </div>
-        </FullPageWrapper>
+              <div className="section" data-anchor="dudas">
+                <section className="content-section dudas-section">
+                  <div className="dudas-container">
+                    <div className="dudas-left">
+                      {/* Left column - empty for now, background image will show */}
+                    </div>
+                    <div className="dudas-right">
+                      <div className="dudas-box">
+                        <h2>¿todavía <br />tienes dudas?</h2>
+                        <Accordion items={dudas} />
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+              <div className="section" data-anchor="contact">
+                <section className="content-section contact-section">
+                  <div className="section-container">
+                    <h2>tu siguiente paso</h2>
+                    <ContactTabs />
+                  </div>
+                  <Footer />
+                </section>
+              </div>
+            </FullPageWrapper>
+          }
+        />
       </ErrorBoundary>
     </div>
   )
