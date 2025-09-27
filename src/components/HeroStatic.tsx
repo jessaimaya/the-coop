@@ -21,12 +21,32 @@ const HeroStatic: React.FC = () => {
     { left: "y queremos", right: "desarrollarlas contigo." }
   ]
 
+  // Reset hero state when returning from FullPage
+  useEffect(() => {
+    const handleBackToHero = () => {
+      console.log('HeroStatic: Received backToHero, resetting state')
+      setActiveHeading(headings.length - 1) // Start from last heading when returning
+      activeHeadingRef.current = headings.length - 1
+      setHeroComplete(false)
+      setIsTransitioning(false)
+    }
+
+    window.addEventListener('backToHero', handleBackToHero)
+    
+    return () => {
+      window.removeEventListener('backToHero', handleBackToHero)
+    }
+  }, [headings.length])
+
   useEffect(() => {
     let scrollAccumulator = 0
     const scrollThreshold = 100 // Amount of scroll needed to advance to next heading
 
     const handleWheel = (e: WheelEvent) => {
-      if (heroComplete) return // Allow normal scrolling if hero is complete
+      if (heroComplete) {
+        console.log('HeroStatic: Hero complete, allowing normal scroll')
+        return // Allow normal scrolling if hero is complete
+      }
 
       e.preventDefault() // Prevent normal scrolling
       

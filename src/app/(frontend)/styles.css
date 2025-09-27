@@ -570,10 +570,10 @@ svg {
 
 /* Content Sections */
 .content-section {
-  height: 100vh;
+  height: calc(100vh - 100px); /* Actual content height minus navbar */
   width: 100vw;
-  min-height: 100vh;
-  padding: 0;
+  min-height: calc(100vh - 100px);
+  margin-top: 100px; /* Push down by navbar height */
   background: #E1E2DF;
   display: flex;
   align-items: center;
@@ -589,9 +589,11 @@ svg {
   height: 100vh;
 }
 
-/* Remove padding from carousel section to fill completely */
-.content-section:first-child {
-  padding: 0;
+
+/* Specific adjustments for sections that need different padding */
+.carousel-slide {
+  padding-top: 0;
+  /* Remove since parent content-section handles navbar spacing */
 }
 
 .section-container {
@@ -652,13 +654,14 @@ main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding-top: 100px;
+  padding-top: 0;
+  /* Remove duplicate padding, parent .section has it */
 }
 
 .slide-content {
   position: absolute;
   left: 5%;
-  top: 40%;
+  top: 40%; /* Position relative to content area */
   transform: translateY(-50%);
   max-width: 45%;
   color: var(--blanco);
@@ -674,7 +677,7 @@ main {
 }
 
 .slide-title {
-  font-size: 7rem;
+  font-size: 6rem;
   font-weight: 700;
   color: var(--gris-palido);
   margin-bottom: 1.5rem;
@@ -772,7 +775,6 @@ main {
   background-position: right center;
   background-repeat: no-repeat;
   overflow: hidden;
-  padding-top: 100px;
 }
 
 .esto-hacemos-text {
@@ -994,7 +996,6 @@ main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding-top: 140px;
 }
 
 
@@ -1086,7 +1087,6 @@ main {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-top: 140px;
   background: transparent;
 }
 

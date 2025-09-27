@@ -19,15 +19,50 @@ const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageCo
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
+    const handleBackToHero = () => {
+      console.log('ScrollManager: backToHero event received, going back to Hero section')
+      setHeroComplete(false)
+      
+      // Scroll to top when returning to hero
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+
+    // Keyboard shortcut for testing
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'h' && e.ctrlKey && heroComplete) {
+        console.log('Keyboard shortcut: Going back to hero')
+        handleBackToHero()
+      }
+    }
+
     window.addEventListener('heroComplete', handleHeroComplete)
+    window.addEventListener('backToHero', handleBackToHero)
+    window.addEventListener('keydown', handleKeyPress)
 
     return () => {
       window.removeEventListener('heroComplete', handleHeroComplete)
+      window.removeEventListener('backToHero', handleBackToHero)
+      window.removeEventListener('keydown', handleKeyPress)
     }
-  }, [])
+  }, [heroComplete])
 
   return (
     <div className="scroll-manager">
+      {/* Debug info */}
+      <div style={{
+        position: 'fixed',
+        top: '50px',
+        right: '10px',
+        zIndex: 10000,
+        background: 'rgba(0,0,0,0.8)',
+        color: 'white',
+        padding: '10px',
+        borderRadius: '5px',
+        fontSize: '12px'
+      }}>
+        Hero Complete: {heroComplete ? 'Yes' : 'No'}
+      </div>
+      
       {/* Always show hero, but hide when complete */}
       <div 
         style={{ 
