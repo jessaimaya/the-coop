@@ -2071,3 +2071,46 @@ main {
 .fade-in {
   opacity: 1 !important;
 }
+
+/* ScrollManager transition styles */
+.scroll-manager {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+  transition: transform 1.2s ease-in-out;
+}
+
+.hero-container.hero-visible {
+  transform: translateY(0);
+}
+
+.hero-container.hero-hidden {
+  transform: translateY(-100vh);
+}
+
+.fullpage-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 200;
+  transition: transform 1.2s ease-in-out;
+}
+
+.fullpage-container.fullpage-hidden {
+  transform: translateY(100vh);
+}
+
+.fullpage-container.fullpage-visible {
+  transform: translateY(0);
+}

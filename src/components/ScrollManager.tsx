@@ -63,23 +63,15 @@ const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageCo
         Hero Complete: {heroComplete ? 'Yes' : 'No'}
       </div>
       
-      {/* Always show hero, but hide when complete */}
-      <div 
-        style={{ 
-          display: heroComplete ? 'none' : 'block',
-          position: 'relative',
-          zIndex: heroComplete ? 0 : 10
-        }}
-      >
+      {/* Hero component - always rendered but positioned */}
+      <div className={`hero-container ${heroComplete ? 'hero-hidden' : 'hero-visible'}`}>
         {heroComponent}
       </div>
       
-      {/* Only render FullPageWrapper when hero is complete */}
-      {heroComplete && (
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          {fullPageComponent}
-        </div>
-      )}
+      {/* FullPage component - always rendered when hero starts transition */}
+      <div className={`fullpage-container ${heroComplete ? 'fullpage-visible' : 'fullpage-hidden'}`}>
+        {fullPageComponent}
+      </div>
     </div>
   )
 }
