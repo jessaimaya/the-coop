@@ -14,7 +14,6 @@ const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageCo
 
   useEffect(() => {
     const handleHeroComplete = () => {
-      console.log('Hero section complete, starting transition to FullPage')
       setIsTransitioning(true)
       
       // Start the slide transition after a brief delay
@@ -27,7 +26,6 @@ const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageCo
     }
 
     const handleBackToHero = () => {
-      console.log('ScrollManager: backToHero event received, starting reverse transition to Hero section')
       setIsReverseTransitioning(true)
       
       // Start the reverse slide transition
@@ -46,7 +44,6 @@ const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageCo
     // Keyboard shortcut for testing
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'h' && e.ctrlKey && heroComplete) {
-        console.log('Keyboard shortcut: Going back to hero')
         handleBackToHero()
       }
     }
@@ -64,21 +61,6 @@ const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageCo
 
   return (
     <div className="scroll-manager">
-      {/* Debug info */}
-      <div style={{
-        position: 'fixed',
-        top: '50px',
-        right: '10px',
-        zIndex: 10000,
-        background: 'rgba(0,0,0,0.8)',
-        color: 'white',
-        padding: '10px',
-        borderRadius: '5px',
-        fontSize: '12px'
-      }}>
-        Hero Complete: {heroComplete ? 'Yes' : 'No'} | Transitioning: {isTransitioning ? 'Yes' : 'No'} | Reverse: {isReverseTransitioning ? 'Yes' : 'No'}
-      </div>
-      
       {/* Hero component - always rendered but positioned */}
       <div className={`hero-container ${heroComplete ? 'hero-hidden' : 'hero-visible'}`}>
         {heroComponent}

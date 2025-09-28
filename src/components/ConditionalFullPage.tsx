@@ -17,7 +17,6 @@ const ConditionalFullPage: React.FC<ConditionalFullPageProps> = ({ children }) =
       
       // Enable Fullpage when we're close to the end of the Hero section
       if (scrollY >= heroHeight - window.innerHeight) {
-        console.log('Activating Fullpage.js mode')
         setEnableFullpage(true)
         window.removeEventListener('scroll', handleScroll)
         
@@ -44,14 +43,7 @@ const ConditionalFullPage: React.FC<ConditionalFullPageProps> = ({ children }) =
 
   if (enableFullpage) {
     return (
-      <div style={{ 
-        position: 'fixed', 
-        top: 0, 
-        left: 0, 
-        width: '100%', 
-        height: '100vh', 
-        zIndex: 10000 
-      }}>
+      <div className="conditional-fullpage-enabled">
         <SimpleScrollSnap>{children}</SimpleScrollSnap>
       </div>
     )
@@ -59,7 +51,7 @@ const ConditionalFullPage: React.FC<ConditionalFullPageProps> = ({ children }) =
 
   // Return regular content without Fullpage.js, positioned after Hero
   return (
-    <div style={{ marginTop: '700vh', position: 'relative', zIndex: 1 }}>
+    <div className="conditional-fullpage-content">
       {children}
     </div>
   )

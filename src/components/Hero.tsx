@@ -35,7 +35,6 @@ const Hero: React.FC = () => {
         
         // Only update if actually different
         if (activeHeadingRef.current !== newActiveHeading) {
-          console.log(`Hero: ${activeHeadingRef.current} -> ${newActiveHeading}`)
           activeHeadingRef.current = newActiveHeading
           setActiveHeading(newActiveHeading)
           setUpdateCounter(c => c + 1)
@@ -44,7 +43,6 @@ const Hero: React.FC = () => {
     }
 
     const handleDisableHero = () => {
-      console.log('Hero scroll handler disabled')
       isDisabled = true
     }
 
@@ -55,7 +53,6 @@ const Hero: React.FC = () => {
         const headingCount = 7 // We have 7 headings
         const newHeight = headingCount * 100
         heroElement.style.height = `${newHeight}vh`
-        console.log(`Hero height set to: ${newHeight}vh`)
       }
     }
 

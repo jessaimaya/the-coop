@@ -29,27 +29,11 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   render() {
     if (this.state.hasError) {
       return this.props.fallback || (
-        <div style={{ 
-          padding: '20px', 
-          color: 'var(--color-text)', 
-          background: 'var(--color-background)',
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column'
-        }}>
+        <div className="error-boundary">
           <h2>Something went wrong with the page navigation.</h2>
           <button 
             onClick={() => window.location.reload()}
-            style={{
-              padding: '10px 20px',
-              background: 'var(--color-primary)',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer'
-            }}
+            className="error-boundary-button"
           >
             Reload page
           </button>

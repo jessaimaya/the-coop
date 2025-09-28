@@ -31,7 +31,7 @@ export default async function HomePage() {
     {
       id: 0,
       title: "somos una<br/> agencia de <br />marketing y <br/>publicidad",
-      description: "somos un espacio de colaboración estratégica.<br />una <strong>estructura flexible</strong> que se arma a la medida<br /> de cada proyecto con <strong>estrategia, creatividad,<br /> criterio y <img src='/images/coop.svg' alt='coop' style='display: inline; height: 1em; vertical-align: baseline; margin: 0 0.1em;' /></strong>",
+      description: "somos un espacio de colaboración estratégica.<br />una <strong>estructura flexible</strong> que se arma a la medida<br /> de cada proyecto con <strong>estrategia, creatividad,<br /> criterio y <img src='/images/coop.svg' alt='coop' class='inline-logo' /></strong>",
       cta: {
         title: "QUIERO SABER +",
         action: "/about"
@@ -41,7 +41,7 @@ export default async function HomePage() {
     {
       id: 1,
       title: "somos una<br/> agencia de <br />marketing y <br/>publicidad",
-      description: "somos un espacio de colaboración estratégica.<br />una <strong>estructura flexible</strong> que se arma a la medida<br /> de cada proyecto con <strong>estrategia, creatividad,<br /> criterio y <img src='/images/coop.svg' alt='coop' style='display: inline; height: 1em; vertical-align: baseline; margin: 0 0.1em;' /></strong>",
+      description: "somos un espacio de colaboración estratégica.<br />una <strong>estructura flexible</strong> que se arma a la medida<br /> de cada proyecto con <strong>estrategia, creatividad,<br /> criterio y <img src='/images/coop.svg' alt='coop' class='inline-logo' /></strong>",
       cta: {
         title: "QUIERO SABER +",
         action: "/about"
@@ -51,7 +51,7 @@ export default async function HomePage() {
     {
       id: 2,
       title: "somos una<br/> agencia de <br />marketing y <br/>publicidad",
-      description: "somos un espacio de colaboración estratégica.<br />una <strong>estructura flexible</strong> que se arma a la medida<br /> de cada proyecto con <strong>estrategia, creatividad,<br /> criterio y <img src='/images/coop.svg' alt='coop' style='display: inline; height: 1em; vertical-align: baseline; margin: 0 0.1em;' /></strong>",
+      description: "somos un espacio de colaboración estratégica.<br />una <strong>estructura flexible</strong> que se arma a la medida<br /> de cada proyecto con <strong>estrategia, creatividad,<br /> criterio y <img src='/images/coop.svg' alt='coop' class='inline-logo' /></strong>",
       cta: {
         title: "QUIERO SABER +",
         action: "/about"
@@ -60,7 +60,7 @@ export default async function HomePage() {
     }, {
       id: 3,
       title: "somos una<br/> agencia de <br />marketing y <br/>publicidad",
-      description: "somos un espacio de colaboración estratégica.<br />una <strong>estructura flexible</strong> que se arma a la medida<br /> de cada proyecto con <strong>estrategia, creatividad,<br /> criterio y <img src='/images/coop.svg' alt='coop' style='display: inline; height: 1em; vertical-align: baseline; margin: 0 0.1em;' /></strong>",
+      description: "somos un espacio de colaboración estratégica.<br />una <strong>estructura flexible</strong> que se arma a la medida<br /> de cada proyecto con <strong>estrategia, creatividad,<br /> criterio y <img src='/images/coop.svg' alt='coop' class='inline-logo' /></strong>",
       cta: {
         title: "QUIERO SABER +",
         action: "/about"

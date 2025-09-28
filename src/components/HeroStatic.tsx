@@ -24,7 +24,6 @@ const HeroStatic: React.FC = () => {
   // Reset hero state when returning from FullPage
   useEffect(() => {
     const handleBackToHero = () => {
-      console.log('HeroStatic: Received backToHero, resetting state')
       setActiveHeading(headings.length - 1) // Start from last heading when returning
       activeHeadingRef.current = headings.length - 1
       setHeroComplete(false)
@@ -56,7 +55,6 @@ const HeroStatic: React.FC = () => {
       newActiveHeading = activeHeading + 1
     } else {
       // Already on last heading, trigger completion
-      console.log('All headings shown, releasing scroll')
       setHeroComplete(true)
       // Dispatch event to notify that hero is complete
       const event = new CustomEvent('heroComplete')
@@ -64,7 +62,6 @@ const HeroStatic: React.FC = () => {
       return
     }
 
-    console.log(`Changing heading from ${activeHeading} to ${newActiveHeading}`)
     lastChangeTimeRef.current = currentTime
     setIsTransitioning(true)
 
@@ -87,14 +84,12 @@ const HeroStatic: React.FC = () => {
 
     const handleWheel = (e: WheelEvent) => {
       if (heroComplete) {
-        console.log('HeroStatic: Hero complete, allowing normal scroll')
         return // Allow normal scrolling if hero is complete
       }
 
       e.preventDefault() // Prevent normal scrolling
       
       scrollAccumulator += e.deltaY
-      console.log(`Scroll accumulator: ${scrollAccumulator}, Active heading: ${activeHeading}`)
 
       // Check if we've accumulated enough scroll to change heading
       if (Math.abs(scrollAccumulator) >= scrollThreshold) {
@@ -113,7 +108,6 @@ const HeroStatic: React.FC = () => {
           newActiveHeading = activeHeading + 1
         } else if (scrollAccumulator > 0 && activeHeading === headings.length - 1) {
           // Scrolling down on last heading - trigger completion
-          console.log('Scrolling down on last heading, triggering completion')
           lastChangeTimeRef.current = currentTime
           scrollAccumulator = 0
           setHeroComplete(true)
@@ -127,8 +121,7 @@ const HeroStatic: React.FC = () => {
         }
 
         if (newActiveHeading !== activeHeading) {
-          console.log(`Changing heading from ${activeHeading} to ${newActiveHeading}`)
-          lastChangeTimeRef.current = currentTime
+                lastChangeTimeRef.current = currentTime
           setIsTransitioning(true)
           scrollAccumulator = 0 // Reset accumulator
 
@@ -150,11 +143,9 @@ const HeroStatic: React.FC = () => {
       }
     }
 
-    console.log('Adding wheel event listener for trapped scrolling')
     window.addEventListener('wheel', handleWheel, { passive: false })
 
     return () => {
-      console.log('Removing wheel event listener')
       window.removeEventListener('wheel', handleWheel)
     }
   }, [activeHeading, heroComplete, headings.length])
@@ -162,24 +153,13 @@ const HeroStatic: React.FC = () => {
   return (
     <div 
       ref={heroRef}
-      style={{ 
-        height: '100vh', 
-        position: 'relative', 
-        overflow: 'hidden',
-        backgroundColor: 'var(--gris, #232323)'
-      }}
+      className="hero-static-container"
     >
       <div className={`hero-fixed-image ${activeHeading > 0 ? 'white' : ''}`}>
         <img src="/images/coop.svg" alt="coop logo" />
       </div>
 
-      <div style={{ 
-        height: '100vh', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        position: 'relative' 
-      }}>
+      <div className="hero-static-content">
         <div className="hero-heading active" style={{
           opacity: isTransitioning ? 0 : 1,
           transition: 'opacity 0.3s ease',
@@ -198,14 +178,9 @@ const HeroStatic: React.FC = () => {
 
       {!heroComplete && (
         <div 
-          className="scroll-message" 
+          className="scroll-message hero-static-scroll-message" 
           onClick={advanceToNextHeading}
           style={{ 
-            position: 'fixed', 
-            bottom: '20px', 
-            left: '50%', 
-            transform: 'translateX(-50%)',
-            zIndex: 10,
             cursor: 'pointer',
             userSelect: 'none'
           }}
@@ -228,26 +203,11 @@ const HeroStatic: React.FC = () => {
       )}
 
       {/* Progress indicator */}
-      <div style={{
-        position: 'fixed',
-        top: '50%',
-        right: '20px',
-        transform: 'translateY(-50%)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px',
-        zIndex: 10
-      }}>
+      <div className="hero-static-progress">
         {headings.map((_, index) => (
           <div
             key={index}
-            style={{
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              backgroundColor: index === activeHeading ? 'var(--naranja, #ee6123)' : 'rgba(255,255,255,0.3)',
-              transition: 'background-color 0.3s ease'
-            }}
+            className={`hero-static-progress-dot ${index === activeHeading ? 'active' : ''}`}
           />
         ))}
       </div>

@@ -51,10 +51,7 @@ const Carousel: React.FC<CarouselProps> = ({ slides }) => {
             <div
               className="carousel-slide"
               style={{
-                backgroundImage: `url(${slide.backgroundImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat'
+                backgroundImage: `url(${slide.backgroundImage})`
               }}
             >
               <div className="slide-content">
