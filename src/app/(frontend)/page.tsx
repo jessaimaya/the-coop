@@ -170,8 +170,6 @@ export default async function HomePage() {
 
   return (
     <div className="home">
-      <Navbar />
-
       <ErrorBoundary>
         <ScrollManager
           heroComponent={<HeroStatic />}

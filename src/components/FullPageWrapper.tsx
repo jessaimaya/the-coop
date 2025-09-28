@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react'
 import ReactFullpage from '@fullpage/react-fullpage'
+import Navbar from './Navbar'
 
 interface FullPageWrapperProps {
   children: React.ReactNode
@@ -73,7 +74,9 @@ const FullPageWrapper: React.FC<FullPageWrapperProps> = ({ children }) => {
   }, [])
 
   return (
-    <ReactFullpage
+    <div>
+      <Navbar />
+      <ReactFullpage
       //fullpage options
       licenseKey={'gplv3-license'} // Using GPL license for open source projects
       credits={{ enabled: false }}
@@ -129,6 +132,7 @@ const FullPageWrapper: React.FC<FullPageWrapperProps> = ({ children }) => {
         )
       }}
     />
+    </div>
   )
 }
 
