@@ -9,11 +9,17 @@ interface ScrollManagerProps {
 
 const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageComponent }) => {
   const [heroComplete, setHeroComplete] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(false)
 
   useEffect(() => {
     const handleHeroComplete = () => {
-      console.log('Hero section complete, transitioning to FullPage')
-      setHeroComplete(true)
+      console.log('Hero section complete, starting transition to FullPage')
+      setIsTransitioning(true)
+      
+      // Start the slide transition after a brief delay
+      setTimeout(() => {
+        setHeroComplete(true)
+      }, 100)
       
       // Scroll to top to prepare for FullPageWrapper
       window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -22,6 +28,7 @@ const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageCo
     const handleBackToHero = () => {
       console.log('ScrollManager: backToHero event received, going back to Hero section')
       setHeroComplete(false)
+      setIsTransitioning(false)
       
       // Scroll to top when returning to hero
       window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -60,7 +67,7 @@ const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageCo
         borderRadius: '5px',
         fontSize: '12px'
       }}>
-        Hero Complete: {heroComplete ? 'Yes' : 'No'}
+        Hero Complete: {heroComplete ? 'Yes' : 'No'} | Transitioning: {isTransitioning ? 'Yes' : 'No'}
       </div>
       
       {/* Hero component - always rendered but positioned */}
@@ -68,10 +75,12 @@ const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageCo
         {heroComponent}
       </div>
       
-      {/* FullPage component - always rendered when hero starts transition */}
-      <div className={`fullpage-container ${heroComplete ? 'fullpage-visible' : 'fullpage-hidden'}`}>
-        {fullPageComponent}
-      </div>
+      {/* FullPage component - only render when transitioning starts */}
+      {isTransitioning && (
+        <div className={`fullpage-container ${heroComplete ? 'fullpage-visible' : 'fullpage-hidden'}`}>
+          {fullPageComponent}
+        </div>
+      )}
     </div>
   )
 }
