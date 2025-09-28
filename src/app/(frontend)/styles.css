@@ -55,7 +55,8 @@ body {
 /* Section Styles */
 .section-container {
   width: 100%;
-  height: calc(100vh - 100px); /* Account for navbar padding */
+  height: calc(100vh - 100px);
+  /* Account for navbar padding */
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -383,7 +384,6 @@ svg {
   padding: 8px 16px;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.1);
     transform: translateX(-50%) translateY(-2px);
   }
 
@@ -415,10 +415,6 @@ svg {
     color: var(--color-text);
     text-align: center;
     transition: color 0.3s ease;
-  }
-
-  &:hover .scroll-text {
-    color: var(--naranja);
   }
 }
 
@@ -585,17 +581,20 @@ svg {
 
 /* Content Sections */
 .content-section {
-  height: 100vh; /* Full viewport height for fullpage.js compatibility */
+  height: 100vh;
+  /* Full viewport height for fullpage.js compatibility */
   width: 100vw;
   min-height: 100vh;
-  margin-top: 0; /* No margin needed in fullpage.js context */
+  margin-top: 0;
+  /* No margin needed in fullpage.js context */
   background: #E1E2DF;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   z-index: 50;
-  padding-top: 100px; /* Padding instead of margin for navbar space */
+  padding-top: 100px;
+  /* Padding instead of margin for navbar space */
   box-sizing: border-box;
 }
 
@@ -654,17 +653,20 @@ main {
 /* Updated Carousel Styles for Full Screen Layout */
 .carousel-container {
   width: 100%;
-  height: calc(100vh - 100px); /* Account for navbar */
+  height: calc(100vh - 100px);
+  /* Account for navbar */
   position: relative;
 }
 
 .coop-carousel {
   width: 100%;
-  height: calc(100vh - 100px); /* Account for navbar */
+  height: calc(100vh - 100px);
+  /* Account for navbar */
 }
 
 .carousel-slide {
-  height: calc(100vh - 100px); /* Account for navbar */
+  height: calc(100vh - 100px);
+  /* Account for navbar */
   display: flex;
   align-items: center;
   position: relative;
@@ -678,7 +680,8 @@ main {
 .slide-content {
   position: absolute;
   left: 5%;
-  top: 40%; /* Position relative to content area */
+  top: 40%;
+  /* Position relative to content area */
   transform: translateY(-50%);
   max-width: 45%;
   color: var(--blanco);
@@ -779,14 +782,16 @@ main {
 .esto-hacemos {
   background: var(--gris);
   padding: 0 !important;
-  padding-top: 100px !important; /* Account for navbar */
+  padding-top: 100px !important;
+  /* Account for navbar */
   box-sizing: border-box;
 }
 
 .esto-hacemos-content {
   position: relative;
   width: 100%;
-  height: calc(100vh - 100px); /* Adjust for navbar padding */
+  height: calc(100vh - 100px);
+  /* Adjust for navbar padding */
   display: flex;
   align-items: center;
   background-image: url('/images/slide_2.jpeg');
@@ -892,7 +897,8 @@ main {
 /* Esto Hacemos Boxes */
 .esto-hacemos-boxes {
   position: absolute;
-  bottom: 5rem; /* Reduced from 10rem to fit better */
+  bottom: 5rem;
+  /* Reduced from 10rem to fit better */
   left: 2rem;
   right: 0;
   width: 80%;
@@ -901,7 +907,8 @@ main {
   gap: 2rem;
   padding: 0 5%;
   z-index: 3;
-  max-height: 25vh; /* Reduced to ensure it fits */
+  max-height: 25vh;
+  /* Reduced to ensure it fits */
 
   @media (max-width: 768px) {
     position: relative;
