@@ -10,6 +10,7 @@ interface ScrollManagerProps {
 const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageComponent }) => {
   const [heroComplete, setHeroComplete] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isReverseTransitioning, setIsReverseTransitioning] = useState(false)
 
   useEffect(() => {
     const handleHeroComplete = () => {
@@ -26,9 +27,17 @@ const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageCo
     }
 
     const handleBackToHero = () => {
-      console.log('ScrollManager: backToHero event received, going back to Hero section')
+      console.log('ScrollManager: backToHero event received, starting reverse transition to Hero section')
+      setIsReverseTransitioning(true)
+      
+      // Start the reverse slide transition
       setHeroComplete(false)
-      setIsTransitioning(false)
+      
+      // After the CSS transition completes, clean up the FullPage component
+      setTimeout(() => {
+        setIsTransitioning(false)
+        setIsReverseTransitioning(false)
+      }, 1200) // Match the CSS transition duration (1.2s)
       
       // Scroll to top when returning to hero
       window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -67,7 +76,7 @@ const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageCo
         borderRadius: '5px',
         fontSize: '12px'
       }}>
-        Hero Complete: {heroComplete ? 'Yes' : 'No'} | Transitioning: {isTransitioning ? 'Yes' : 'No'}
+        Hero Complete: {heroComplete ? 'Yes' : 'No'} | Transitioning: {isTransitioning ? 'Yes' : 'No'} | Reverse: {isReverseTransitioning ? 'Yes' : 'No'}
       </div>
       
       {/* Hero component - always rendered but positioned */}
@@ -75,8 +84,8 @@ const ScrollManager: React.FC<ScrollManagerProps> = ({ heroComponent, fullPageCo
         {heroComponent}
       </div>
       
-      {/* FullPage component - only render when transitioning starts */}
-      {isTransitioning && (
+      {/* FullPage component - render during transitions and when hero is complete */}
+      {(isTransitioning || isReverseTransitioning) && (
         <div className={`fullpage-container ${heroComplete ? 'fullpage-visible' : 'fullpage-hidden'}`}>
           {fullPageComponent}
         </div>
